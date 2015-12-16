@@ -102,3 +102,7 @@
    {
      background: white !important;   
    }
+   #tmm-form-wizard .button
+   {
+    background-image: linear-gradient(to bottom, #EC4949 25%, #C04040 100%);   
+   }
