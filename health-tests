@@ -20,6 +20,7 @@
 <link rel="stylesheet" href="css/tmm_form_wizard_style_demo.css"/>
 <link rel="stylesheet" href="css//tmm_form_wizard_layout.css"/>
 <link rel="stylesheet" href="css/the-modal.css"/>
+<link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css"/>
 <link href="css/sliderstyle.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="css/health_tests.css"/>
 </head>
@@ -137,11 +138,6 @@
     </div>
   </div>
 </section>
-
- <!--<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/jquery.flexisel.js"></script>
-<script src="js/custom_script_tests.js"></script>-->
 <script type="text/javascript">
 var a=['https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js',
         'js/bootstrap.min.js',
@@ -157,60 +153,6 @@ var a=['https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js',
   element.async = false; 
   document.body.appendChild(element);
 });
-</script>
-<!--<script>
-	$('#nav_home').removeClass('top-menu-active');
-	$('#nav_tests').addClass('top-menu-active');
-	$('#nav_pkgs').removeClass('top-menu-active');
-	$('#nav_hotdeals').removeClass('top-menu-active');
-	$('#nav_labs').removeClass('top-menu-active');
-  	$('#nav_blog').removeClass('top-menu-active');
-	$('#nav_contact').removeClass('top-menu-active');
-</script>-->
-
-<!--<script>
-	$(".project-list ul li").click(function(){
-		console.log($(this));
-		$(".project-list ul li").each(function(){
-						if($(this).hasClass("test-active-color")){
-								$(this).removeClass("test-active-color");
-						}
-			});
-		$(this).addClass("test-active-color");
-		});
-		
-	$(".data-r").hide();
-	$(".table tbody tr td:first-child").click(function(){	
-					 if(!$(this).parent().next().children().is(":visible")){
-						$(".data-r").hide();
-						 if($(this).parent().next().children().hasClass('data-r')==true){
-					        $(this).parent().next().children().slideDown(600);
-						}
-					 }else{
-					  if($(this).parent().next().children().hasClass('data-r')==true){
-						 $(this).parent().next().children().slideUp(600);
-						 }
-					 }
-			});
-			
-			/*$(".health-test-head h4").click(function(){
-			
-				 if(!$(this).parent().next(".health-test-b-cont").is(":visible")){
-					 $('.health-test-b-cont').slideUp();
-				   $(".health-test-body").remove();;
-					 $('<div class="health-test-body"><div class="health-test-data"><p>packges provide all facilitiespackges provide all facilitiespackges provide all facilitiespackges provide all facilities</p><a href="check-investigation-details.html" >book Now</a></div> </div>').appendTo($(this).parent().next('.health-test-b-cont'));
-					 $(this).parent().next('.health-test-b-cont').slideDown();
-					
-				 
-				 }else{
-				   $(this).parent().next('.health-test-b-cont').slideUp();
-				   setTimeout(function(){$(this).parent().next().children(".health-test-body").remove();},50);
-				 }
-			
-			
-			}); */
-		
-
 </script>
 
 
