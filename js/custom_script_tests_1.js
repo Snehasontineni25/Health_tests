@@ -15,30 +15,46 @@ function tests_list_handler()
          	var tst_loading = document.getElementById("tst_loader");
              $(tst_loading).css('display','none');
 	         var cust_container = document.getElementsByClassName("cust-container")[0];
-            var tst_heading_row = document.createElement('div');
+	         var tst_heading_row = document.createElement('div');
             $(tst_heading_row).addClass("row m-z");
             var tst_list = document.createElement('div');
             $(tst_list).addClass("test-cat-list");
             var tst_list_col = document.createElement('div');
-            $(tst_list_col).addClass("col-md-6");
+            $(tst_list_col).addClass("col-md-3");
             var tst_row_deals_head = document.createElement('div');
             $(tst_row_deals_head).addClass("row s-deals-heading");
             var tst_head_element = document.createElement('h2');
             $(tst_head_element).html("Health Tests");
             $(tst_row_deals_head).append(tst_head_element);
             $(tst_list_col).append(tst_row_deals_head);
+            var tst_search_book_col = document.createElement('div');
+            $(tst_search_book_col).addClass("col-md-9");
+            $(tst_search_book_col).css('marginTop','12px');
+            //$(tst_search_book_col).html("length");
+            var tst_sel_length = document.createElement('div');
+            $(tst_sel_length).addClass("col-md-3");
+            //$(tst_sel_length).html("tests selected");
+            var tst_btn_div = document.createElement('div');
+            $(tst_btn_div).addClass("col-md-2");
+            //$(tst_btn_div).css('float','right');
+            //$(tst_btn_div).css('paddingRight','7%');
+            //$(tst_btn_div).css('paddingTop','1%');
+            var tst_book_button = document.createElement('button');
+            //$(tst_book_button).html("Book Now");
+            $(tst_book_button).css('background','#ec4949');
+            $(tst_book_button).css('color','white');
+            $(tst_book_button).css('border','0px');
+            $(tst_book_button).css('fontWeight','bold');
+            $(tst_book_button).css('borderRadius','3px');
             var tst_search_col = document.createElement('div');
-            $(tst_search_col).addClass("col-md-3");
+            $(tst_search_col).addClass("col-md-4");
+            $(tst_search_col).css('float','right');
             var tst_search_cont = document.createElement('div');
             $(tst_search_cont).addClass("search-container");
             var tst_search_form = document.createElement('div');
             $(tst_search_form).addClass("form-group cust_input" );
-           // $(tst_search_form).css('width','244px');
-            //$(tst_search_form).css('marginLeft','-5px');
-            //$(tst_search_form).css('marginTop','8px');
-            $(tst_search_form).css('width','152%');
-            var tst_search_ip_img = document.createElement('div');
-         	$(tst_search_ip_img).css('width','80%');
+             var tst_search_ip_img = document.createElement('div');
+         	$(tst_search_ip_img).css('width','203px');
             var tst_search_input = document.createElement('input');
             $(tst_search_input).addClass("form-control");
             $(tst_search_input).attr('id','tst_search');
@@ -55,23 +71,10 @@ function tests_list_handler()
          	$(tst_search_img).attr("src","images/Black_Remove.png");
          	$(tst_search_img).css('height','14px');
          	$(tst_search_img).css('width','15px');
-
             var tst_input_span = document.createElement('span');
             var tst_input_span_i = document.createElement('i');
             $(tst_input_span_i).addClass("fa fa-search");
-            var tst_btn_div = document.createElement('div');
-            $(tst_btn_div).css('float','right');
-            $(tst_btn_div).css('paddingRight','7%');
-            $(tst_btn_div).css('paddingTop','1%');
-            var tst_book_button = document.createElement('button');
-            $(tst_book_button).html("Book Now");
-            $(tst_book_button).css('background','#ec4949');
-            $(tst_book_button).css('color','white');
-            $(tst_book_button).css('border','0px');
-            $(tst_book_button).css('fontWeight','bold');
-            $(tst_book_button).css('borderRadius','3px');
-            $(tst_btn_div).append(tst_book_button);
-            $(tst_input_span).append(tst_input_span_i);
+             $(tst_input_span).append(tst_input_span_i);
             
             $(tst_search_ip_img).append(tst_search_input);
             $(tst_search_ip_img).append(tst_search_div_img);
@@ -80,9 +83,12 @@ function tests_list_handler()
             $(tst_search_form).append(tst_input_span);
             $(tst_search_cont).append(tst_search_form);
             $(tst_search_col).append(tst_search_cont);
+            $(tst_btn_div).append(tst_book_button);
             $(tst_list).append(tst_list_col);
-            $(tst_list).append(tst_search_col);
-            $(tst_list).append(tst_btn_div);
+            $(tst_search_book_col).append(tst_sel_length);
+            $(tst_search_book_col).append(tst_btn_div);
+            $(tst_search_book_col).append(tst_search_col);
+            $(tst_list).append(tst_search_book_col);
             $(tst_heading_row).append(tst_list);
             $(cust_container).append(tst_heading_row);
             var tst_list_row = document.createElement('div');
@@ -127,188 +133,64 @@ function tests_list_handler()
             $(tst_prjct_list_cont).append(tst_prjct_list);
             $(tst_prjct_col).append(tst_prjct_list_cont);
             $(tst_list_row).append(tst_prjct_col);
-            //$(cust_container).append(tst_list_row); 
-            //console.log(data.testsList[1].testName);
-            var tst_test_list_col =  document.createElement('div');
+             var tst_test_list_col =  document.createElement('div');
             $(tst_test_list_col).addClass("col-md-9");
-            var tst_list_row_style = document.createElement('div');
-            $(tst_list_row_style).addClass("row g-style");
-             console.log(data.testsList[0].testName.length);
-             console.log(data.testsList.length/3);
-           var t_name =data.testsList[0].testName;
-           var s_name = data.testsList[0];
-           //console.log(s_name);
-           //console.log(s_name++);
-                	//console.log(t_name);
-                	var s_z =0;
-                	//console.log(s_z);
-                	//console.log(data.testsList[s_z].testName);
-                	//s_z++;
-                	//console.log(s_z);
-                	//console.log(data.testsList[s_z].testName);
-                
-           /* for (var i=0;i<data.testsList.length;i++) 
-            {  
-            	//console.log(data.testsList[s_z].testName);
-            	//var d = data.testsList[s_z].testName;
-            	//console.log(d.length);
-            	 var tst_test_list_row = document.createElement('div');
-                $(tst_test_list_row).addClass("row");
-                 	var tst_test_left = document.createElement('div');
-                $(tst_test_left).addClass("left_element");
-                var tst_test_middle = document.createElement('div');
-                $(tst_test_middle).addClass("middle_element");
-                var tst_test_right = document.createElement('div');
-                $(tst_test_right).addClass("right_element");
-                var tst_test_list_row_col = document.createElement('div');
-                $(tst_test_list_row_col).addClass("col-md-4");
-                $(tst_test_list_row_col).attr('id',data.testsList[i].testname);
-                 //console.log(tst_test_list_row_col);
-                var tst_hlth_tst_row = document.createElement('div');
-                $(tst_hlth_tst_row).addClass("row");
-                var tst_hlth_tst_box = document.createElement('div');
-                $(tst_hlth_tst_box).addClass("health_test-box");
-                var tst_hlth_tst_head = document.createElement('div');
-                $(tst_hlth_tst_head).addClass("health_test-head");
-                var tst_checkbox = document.createElement('div');
-                $(tst_checkbox).addClass("pkg_chck-box");
-                var tst_chkbox_input = document.createElement('input');
-                $(tst_chkbox_input).addClass("package_chk");
-                $(tst_chkbox_input).attr('type','checkbox');
-                $(tst_chkbox_input).attr('id','test_check');
-                 $(tst_chkbox_input).attr('name','test_checked');
-                 $(tst_chkbox_input).attr('value',data.testsList[i].testName);
-                $(tst_chkbox_input).attr('data-testname',data.testsList[i].testName);
-                $(tst_chkbox_input).attr('data-testslug',data.testsList[i].testSlug);
-                $(tst_checkbox).append(tst_chkbox_input);
-                
-                var tst_hlth_tst_heading = document.createElement('p');
-                $(tst_hlth_tst_heading).html(data.testsList[i].testName);
-                $(tst_hlth_tst_head).append(tst_checkbox);
-                $(tst_hlth_tst_head).append(tst_hlth_tst_heading);
-                $(tst_hlth_tst_box).append(tst_hlth_tst_head);
-                $(tst_hlth_tst_row).append(tst_hlth_tst_box);
-                $(tst_test_list_row_col).append(tst_hlth_tst_row);
-                $(tst_test_left).append(tst_test_list_row_col);
-                $(tst_test_list_row).append(tst_test_left);
-                var tst_test_list_row_col = document.createElement('div');
-                $(tst_test_list_row_col).addClass("col-md-4");
-                $(tst_test_list_row_col).attr('id',data.testsList[i].testname);
-                var tst_hlth_tst_row = document.createElement('div');
-                $(tst_hlth_tst_row).addClass("row");
-                var tst_hlth_tst_box = document.createElement('div');
-                $(tst_hlth_tst_box).addClass("health_test-box");
-                var tst_hlth_tst_head = document.createElement('div');
-                $(tst_hlth_tst_head).addClass("health_test-head");
-                var tst_checkbox = document.createElement('div');
-                $(tst_checkbox).addClass("pkg_chck-box");
-                var tst_chkbox_input = document.createElement('input');
-                $(tst_chkbox_input).addClass("package_chk");
-                $(tst_chkbox_input).attr('type','checkbox');
-                $(tst_chkbox_input).attr('id','test_check');
-                 $(tst_chkbox_input).attr('name','test_checked');
-                 $(tst_chkbox_input).attr('value',data.testsList[i].testName);
-                $(tst_chkbox_input).attr('data-testname',data.testsList[i].testName);
-                $(tst_chkbox_input).attr('data-testslug',data.testsList[i].testSlug);
-                $(tst_checkbox).append(tst_chkbox_input);
-              
-                var tst_hlth_tst_heading = document.createElement('p');
-                $(tst_hlth_tst_heading).html(data.testsList[i].testName);
-                $(tst_hlth_tst_head).append(tst_checkbox);
-                $(tst_hlth_tst_head).append(tst_hlth_tst_heading);
-                $(tst_hlth_tst_box).append(tst_hlth_tst_head);
-                $(tst_hlth_tst_row).append(tst_hlth_tst_box);
-                $(tst_test_list_row_col).append(tst_hlth_tst_row);
-                $(tst_test_middle).append(tst_test_list_row_col);
-                $(tst_test_list_row).append(tst_test_middle);
-                var tst_test_list_row_col = document.createElement('div');
-                $(tst_test_list_row_col).addClass("col-md-4");
-                 $(tst_test_list_row_col).attr('id',data.testsList[i].testname);
-                var tst_hlth_tst_row = document.createElement('div');
-                $(tst_hlth_tst_row).addClass("row");
-                var tst_hlth_tst_box = document.createElement('div');
-                $(tst_hlth_tst_box).addClass("health_test-box");
-                var tst_hlth_tst_head = document.createElement('div');
-                $(tst_hlth_tst_head).addClass("health_test-head");
-                var tst_checkbox = document.createElement('div');
-                $(tst_checkbox).addClass("pkg_chck-box");
-                var tst_chkbox_input = document.createElement('input');
-                $(tst_chkbox_input).addClass("package_chk");
-                $(tst_chkbox_input).attr('type','checkbox');
-                $(tst_chkbox_input).attr('id','test_check');
-                 $(tst_chkbox_input).attr('name','test_checked');
-                 $(tst_chkbox_input).attr('value',data.testsList[i].testName);
-                $(tst_chkbox_input).attr('data-testname',data.testsList[i].testName);
-                $(tst_chkbox_input).attr('data-testslug',data.testsList[i].testSlug);
-                $(tst_checkbox).append(tst_chkbox_input);
-              
-                var tst_hlth_tst_heading = document.createElement('p');
-                $(tst_hlth_tst_heading).html(data.testsList[i].testName);
-                $(tst_hlth_tst_head).append(tst_checkbox);
-                $(tst_hlth_tst_head).append(tst_hlth_tst_heading);
-                $(tst_hlth_tst_box).append(tst_hlth_tst_head);
-                $(tst_hlth_tst_row).append(tst_hlth_tst_box);
-                $(tst_test_list_row_col).append(tst_hlth_tst_row);
-                $(tst_test_right).append(tst_test_list_row_col);
-                $(tst_test_list_row).append(tst_test_right);
-                //$(tst_test_list_row).append(tst_test_list_row_col);
-                $(tst_list_row_style).append(tst_test_list_row);
-                $(tst_test_list_col).append(tst_list_row_style);
-                //$(cust_container).append(tst_test_list_col);
-                $(tst_list_row).append(tst_test_list_col);
-            }//for loop */
-            for (i=0;i<data.testsList.length;i++) 
+            var tests_list = document.createElement('div');
+            $(tests_list).addClass("tests_listbox");
+              for (i=0;i<data.testsList.length;i++) 
             {
-                 	 
-            	 var tst_test_list_row = document.createElement('div');
-                $(tst_test_list_row).addClass("test_element");
-                //$(tst_test_list_row).css('height','96px');
-                var tst_test_list_row_col = document.createElement('div');
-                $(tst_test_list_row_col).addClass("col-md-4");
-                //console.log(data.testsList[i].testName);
-                $(tst_test_list_row_col).attr('id',data.testsList[i].testName);
-                var tst_hlth_tst_row = document.createElement('div');
-                $(tst_hlth_tst_row).addClass("row");
-                var tst_hlth_tst_box = document.createElement('div');
-                $(tst_hlth_tst_box).addClass("health_test-box");
-                $(tst_hlth_tst_box).attr('id', data.testsList[i].testname);
-                var tst_hlth_tst_head = document.createElement('div');
-                $(tst_hlth_tst_head).addClass("health_test-head");
-                //$(tst_hlth_tst_head).css('height','61px');
-                var tst_checkbox = document.createElement('div');
-                $(tst_checkbox).addClass("pkg_chck-box");
-                var tst_chkbox_input = document.createElement('input');
+            	var tst_name_col = document.createElement('div');
+            	$(tst_name_col).addClass("col-md-4");
+            	$(tst_name_col).attr('id',data.testsList[i].testName);
+            	 
+            	var tst_det = document.createElement('div');
+            	$(tst_det).addClass("test_details");
+            	var tst_chk_box = document.createElement('div');
+            	$(tst_chk_box).addClass("check_box");
+            	 var tst_chkbox_input = document.createElement('input');
                 $(tst_chkbox_input).addClass("package_chk");
                 $(tst_chkbox_input).attr('type','checkbox');
                 $(tst_chkbox_input).attr('id','test_check');
-                 $(tst_chkbox_input).attr('name','test_checked');
-                 $(tst_chkbox_input).attr('value',data.testsList[i].testName);
-                 //console.log(data.testsList[i].testname);
-                 //console.log(data.testsList[i].testName);
+                $(tst_chkbox_input).attr('name','test_checked');
+                $(tst_chkbox_input).attr('value',data.testsList[i].testName);
                 $(tst_chkbox_input).attr('data-testname',data.testsList[i].testName);
                 $(tst_chkbox_input).attr('data-testslug',data.testsList[i].testSlug);
-                $(tst_checkbox).append(tst_chkbox_input);
-                var tst_hlth_tst_heading = document.createElement('p');
-                $(tst_hlth_tst_heading).html(data.testsList[i].testName);
-                $(tst_hlth_tst_heading).attr('id',data.testsList[i].testSlug);
-                $(tst_hlth_tst_head).append(tst_checkbox);
-                $(tst_hlth_tst_head).append(tst_hlth_tst_heading);
-                $(tst_hlth_tst_box).append(tst_hlth_tst_head);
-                $(tst_hlth_tst_row).append(tst_hlth_tst_box);
-                $(tst_test_list_row_col).append(tst_hlth_tst_row);
-                $(tst_test_list_row).append(tst_test_list_row_col);
-                $(tst_list_row_style).append(tst_test_list_row);
-                $(tst_test_list_col).append(tst_list_row_style);
-                //$(cust_container).append(tst_test_list_col);
-                $(tst_list_row).append(tst_test_list_col);
+                $(tst_chk_box).append(tst_chkbox_input);
+                 $(tst_chk_box).on('click',function () 
+              {
+              	   //alert("click");
+              	   console.log("click");
+              	   var chkboxarray = [];
+              	    $('input[name="test_checked"]:checked').each(function() 
+            {
+             
+               chkboxarray.push($(this).val());
+               var t_l = chkboxarray.length;
+               console.log(chkboxarray.length);
+               if (chkboxarray.length >= 1) 
+               {
+               $(tst_book_button).html("Book Now");
+               $(tst_sel_length).css('fontWeight','bold');
+               $(tst_sel_length).html("No of tests selected"+":"+t_l);
+              }
+             });
+                  //check_handler();     	
+              	});
+                var tst_name_p = document.createElement('p');
+                $(tst_name_p).html(data.testsList[i].testName);
+                $(tst_name_p).attr('title',data.testsList[i].testName);
+                $(tst_name_p).attr('id','data.testsList[j].testSlug');
+                $(tst_name_p).css('maxHeight','25px');
+                $(tst_name_p).css('overflow','hidden');
+                $(tst_det).append(tst_chk_box);
+                $(tst_det).append(tst_name_p);
+                $(tst_name_col).append(tst_det);
+                $(tests_list).append(tst_name_col);
             }//for loop
             $(tst_search_form).on('keyup',function () 
            {
            	$(tst_search_div_img).append(tst_search_img);
-           	//var tst_search_input = $("#tst_search").val();
-           	  console.log(tst_search_input);
-           	   
-           	$(tst_search_div_img).css('display','block')
+           	  $(tst_search_div_img).css('display','block')
              for (var j=0;j<data.testsList.length;j++) 
              {
            	  var tst_search_name = document.getElementById(data.testsList[j].testName);
@@ -316,7 +198,7 @@ function tests_list_handler()
            	      test_search_handler(tst_search_name,tst_title) ;
              	   }//
            	});//key event
-           		$(tst_search_div_img).on('click',function () 
+           	$(tst_search_div_img).on('click',function () 
            	{
                   $(tst_search_input).val("");
                    for (var tst=0;tst<data.testsList.length;tst++) 
@@ -327,73 +209,94 @@ function tests_list_handler()
                       var tst_title = document.getElementById(data.testsList[tst].testSlug);
                       $(tst_title).html(data.testsList[tst].testName);
                    }//for loop	
-                             	$("#search").focus();
+                             	$("#tst_search").focus();
                              	
            		});//click
             $(tst_btn_div).on('click',function () 
             {
-               //alert(document.getElementById('test_check').checked);
-               //console.log($('input:checkbox:checked').val());
                var chkboxarray = [];
                var new_array = [];
             $('input[name="test_checked"]:checked').each(function() 
             {
              
                chkboxarray.push($(this).val());
-               //console.log(chkboxarray);
                 new_array.push($(this).data('testslug'));
-              
-              });    
-              // console.log(new_array);
-              //console.log(chkboxarray);
-              //console.log(chkboxarray.length);
-              var chkbox_lnth = chkboxarray.length;
-              sel_test_list(chkboxarray,new_array);
-             // console.log($('input[name="test_checked"]:checked').length);   	
-            	});
-            $(cust_container).append(tst_list_row); 
+                console.log(chkboxarray);
+                console.log(chkboxarray.length);
+                sel_test_list(chkboxarray,new_array)
+              }); 	
+              if (chkboxarray.length == "0") 
+              {
+              	   console.log("not");
+              	   test_not_sel_hndlr();
+              }
+             });//click 
+              $("#test_check").on('click',function () 
+              {
+              	   //alert("click");
+              	   //console.log("click");
+              	   var chkboxarray = [];
+              	    $('input[name="test_checked"]:checked').each(function() 
+            {
+             
+               chkboxarray.push($(this).val());
+               console.log(chkboxarray.length);
+              });
+                  check_handler();     	
+              	});
+                          
+             $(tst_test_list_col).append(tests_list);
+              $(tst_list_row).append(tst_test_list_col);
+              $(cust_container).append(tst_list_row);
       }//success
   });//ajax
 }//fnct hndlr
 window.onload = tests_list_handler();
+function check_handler()
+{
+if (document.getElementById('test_check').checked) 
+{
+     alert("checked");
+ } else 
+ {
+      alert("You didn't check it! Let me check it for you.");
+  }
+}
 function test_search_handler(tst_search_name,tst_title) 
 {
 	
-	var tst_search_val = $("#tst_search").val();
-	var tst_val_exp = new RegExp(tst_search_val);
+	 var tst_search_val = $("#tst_search").val();
+	 var tst_val_exp = new RegExp(tst_search_val);
  	 var tst_id = tst_search_name.id;
  	 var tst_id_lowercase = tst_id.toLowerCase();
  	 var tst_id_lnth = tst_id.length;
- 	 $(tst_title).html('');
+ 	 //$(tst_title).html('');
   if (tst_val_exp.test(tst_id_lowercase)) 
   {
-    $(tst_search_name).css('display','block');
-    var tst_lnth = tst_search_val.length;
+      $(tst_search_name).css('display','block');
+      var tst_lnth = tst_search_val.length;
       var tst_index = tst_id_lowercase.indexOf(tst_search_val);
       var tst_str = tst_id.substr(tst_index,tst_lnth);
       var left_tst = tst_id.substr(0,tst_index);
       var tst_substr_lnth = tst_index+tst_lnth;
       var right_tst = tst_id.substr(tst_substr_lnth);
-       console.log(left_tst);
-       console.log(tst_str);
-       console.log(right_tst);
-       var tst_left_name = document.createElement('div');
-       $(tst_left_name).css('float','left');
-       var tst_str_name = document.createElement('div');
-       $(tst_str_name).html(tst_str);
-       $(tst_str_name).addClass("pkgs");
-       $(tst_str_name).css('float','left');
-       $(tst_str_name).css('background','rgb(65,167,179)');
-       $(tst_str_name).css('color','white');
-       $(tst_str_name).css('padding','0px');
-       $(tst_str_name).css('lineHeight','1');
-       $(tst_str_name).css('marginTop','3px');
-       var tst_right_name =document.createElement('div');
-       $(tst_right_name).css('float','left');
-       var tst_text_ip = tst_search_val ;
-       var tst_text_ip_lnth = tst_search_val.length; 
-       var tst_empty_space = tst_search_val.charAt(tst_text_ip_lnth -1);
-        if ((right_tst.charAt(0)==" ")  ||(tst_search_val.charAt(tst_text_ip_lnth -1)==" " ))   
+      var tst_left_name = document.createElement('div');
+      $(tst_left_name).css('float','left');
+      var tst_str_name = document.createElement('div');
+      $(tst_str_name).html(tst_str);
+      $(tst_str_name).addClass("pkgs");
+      $(tst_str_name).css('float','left');
+      $(tst_str_name).css('background','rgb(65,167,179)');
+      $(tst_str_name).css('color','white');
+      $(tst_str_name).css('padding','0px');
+      $(tst_str_name).css('lineHeight','1');
+      $(tst_str_name).css('marginTop','3px');
+      var tst_right_name =document.createElement('div');
+      $(tst_right_name).css('float','left');
+      var tst_text_ip = tst_search_val ;
+      var tst_text_ip_lnth = tst_search_val.length; 
+      var tst_empty_space = tst_search_val.charAt(tst_text_ip_lnth -1);
+      if ((right_tst.charAt(0)==" ")  ||(tst_search_val.charAt(tst_text_ip_lnth -1)==" " ))   
         {
         	  $(tst_right_name).html("&nbsp;"+right_tst);
         }//if char 
@@ -415,31 +318,70 @@ function test_search_handler(tst_search_name,tst_title)
          {
          	$(tst_title).css('paddingBottom','35px');
          }
-       $(tst_title).append(tst_left_name);
-        $(tst_title).append(tst_str_name);
-        $(tst_title).append(tst_right_name);
-        var tst_ele = document.createElement('div');
-        //$(tst_title).append(tst_ele);
-}
+        //$(tst_title).append(tst_left_name);
+        //$(tst_title).append(tst_str_name);
+        //$(tst_title).append(tst_right_name);
+ }//if tst
 else 
 {
 	 $(tst_search_name).css('display','none');
-}
+}//else
 }//fnct hndlr
+    function  test_not_sel_hndlr() 
+    {
+             var  tst_labtest_alert = document.createElement('div');
+               $(tst_labtest_alert).addClass("modal");
+               $(tst_labtest_alert).attr('id', 'labtest_modal');
+               $(tst_labtest_alert).css('position','relative');
+               $(tst_labtest_alert).css('backgroundColor','#fff'); 
+               $(tst_labtest_alert).css('position','relative');
+               $(tst_labtest_alert).css('border','0px');
+               $(tst_labtest_alert).css('borderRadius','5px');
+               $(tst_labtest_alert).css('paddingRight','0px');
+                $(tst_labtest_alert).modal().open(); 
+               var tst_close_action  = document.createElement('a');
+               $(tst_close_action).addClass("close");
+               $(tst_close_action).attr('href','#');
+               $(tst_close_action).html("&times;");
+               $(tst_close_action).css('marginTop' ,'-21px');
+               $(tst_close_action).css('fontSize','30px');
+               $(tst_close_action).css('marginRight','7px');
+               var modal_labclose_body = document.createElement('div');
+                $(modal_labclose_body).html('Minimum  one test must be selected');
+               $(modal_labclose_body).css('padding' ,'10px');
+               $(modal_labclose_body).css('position','relative');
+              var modal_labtest_footer = document.createElement('div');
+              $(modal_labtest_footer).css('textAlign','right');
+              $(modal_labtest_footer).css('padding','15px');
+              $(modal_labtest_footer).css('borderTop','1px solid #e5e5e5');
+              $(modal_labtest_footer).css('marginRight','20px');
+             var labtest_btnelement = document.createElement('button');
+             $(labtest_btnelement).addClass("btn btn-primary");
+             $(labtest_btnelement).html("Ok");
+             $(tst_close_action).on('click',function () 
+             {
+             	$(tst_labtest_alert).modal().close(); 
+             	});
+             	$(labtest_btnelement).on('click',function () 
+             	{
+             		$(tst_labtest_alert).modal().close();
+             		});
+                $(modal_labtest_footer).append(labtest_btnelement);
+                $('#labtest_modal').append(tst_close_action);
+                $('#labtest_modal').append(modal_labclose_body);
+                $('#labtest_modal').append(modal_labtest_footer);
+                 return false;
+    }//fnctn
 function sel_test_list(chkboxarray,new_array)
  {
- 	            //console.log(check_value);
+ 	           
  	            var tst_checked = $('input[name="test_checked"]:checked').length;
- 	            
-               //console.log(tst_checked);
-              
-               var tst_sel_test_list_modal = document.createElement('div');
+ 	            var tst_sel_test_list_modal = document.createElement('div');
                $(tst_sel_test_list_modal).addClass("modal");
                $(tst_sel_test_list_modal).attr('id', 'modal_test_firstpage');
                $(tst_sel_test_list_modal).css('position','relative');
                $(tst_sel_test_list_modal).css('backgroundColor','#fff');
                $(tst_sel_test_list_modal).css('paddingRight','0px');
-              
                var tst_sel_test_close_element = document.createElement('a');
                $(tst_sel_test_close_element).addClass("close");
                $(tst_sel_test_close_element).attr('href','#');
@@ -457,60 +399,92 @@ function sel_test_list(chkboxarray,new_array)
                $(tst_sel_test_list_modal).append(tst_sel_test_head_name);
                var tst_list_heading = document.createElement('div');
                $(tst_list_heading).html("Tests list");
-               //$(tst_list_heading).addClass("sel_test_list");
                $(tst_list_heading).css('background','#41A7B3');
                $(tst_list_heading).css('color','white');
                $(tst_list_heading).css('fontWeight','bold');
                $(tst_list_heading).css('textAlign','center');
-               $(tst_list_heading).css('marginRight','3%');
-               $(tst_list_heading).css('marginTop','3%');
+               $(tst_list_heading).css('marginRight','20px');
+               $(tst_list_heading).css('marginTop','20px');
                 $(tst_sel_test_list_modal).append(tst_list_heading);
                 var tst_list_table = document.createElement('table');
                 //console.log(chkboxarray.length);
                 for (i=0;i<chkboxarray.length;i++) 
                 {
-                	//var split_array = chkboxarray;
-                	//var s_array = split_array.split("");
-                	//console.log(s_array);
-                //var tst_list_tr = document.createElement('tr');
-                //$(tst_list_tr).addClass("sel_test_list");
-                //var tst_list_td = document.createElement('td');
-                //$(tst_list_td).html(chkboxarray[i]);
-                //$(tst_list_tr).append(tst_list_td);
-                //$(tst_list_table).append(tst_list_tr);
+                 var tst_list_btn = document.createElement('div');
+                 $(tst_list_btn).addClass("list_test");
+                 $(tst_list_btn).attr('id',chkboxarray[i]);
+                var tst_list_remove = document.createElement('div');
+                $(tst_list_remove).css('border','1px solid #ddd');
+                $(tst_list_remove).attr('id','sel_test_list');
+                $(tst_list_remove).addClass("row");
+                //$(tst_list_remove).css('width','554px');
                 var tst_list_div = document.createElement('div');
-                $(tst_list_div).addClass("sel_test_list");
+                
                 $(tst_list_div).html("&nbsp"+"&nbsp"+"&nbsp"+chkboxarray[i]);
-                $(tst_list_div).css('border','1px solid #ddd');
-                $(tst_sel_test_list_modal).append(tst_list_div);
-                }
-                //$(tst_sel_test_list_modal).append(tst_list_heading);
-                //$(tst_sel_test_list_modal).append(tst_list_table);
+                //$(tst_list_div).css('border','1px solid #ddd');
+                $(tst_list_div).css('float','left');
+                var tst_sel_remove_div = document.createElement('div');
+                $(tst_sel_remove_div).css('paddingTop','3px');
+                $(tst_sel_remove_div).css('paddingRight','3px');
+                var tst_sel_remove_button = document.createElement('button');
+               $(tst_sel_remove_button).html("Remove");
+               $(tst_sel_remove_button).css("background" ,"#ea494f");
+               $(tst_sel_remove_button).css('color','white');
+               $(tst_sel_remove_button).css('border','0px');
+               $(tst_sel_remove_button).css('borderRadius','5px');
+               $(tst_sel_remove_button).css('width','10%');
+               $(tst_sel_remove_button).css('fontWeight','bold');
+               $(tst_sel_remove_button).css('float','right');
+               $(tst_sel_remove_button).css('fontSize','10px');
+               console.log(chkboxarray[i]);
+               $(tst_sel_remove_button).on('click',function () 
+                {
+                	  console.log(chkboxarray[i]);
+                	 var t_rem = document.getElementById(chkboxarray[i]);
+                	 console.log(document.getElementById(chkboxarray[i]));
+                	 console.log(t_rem);
+                   $(t_rem).css('display','none'); 
+                  //$(this).css('display','none');               	 
+                	  console.log("remove");
+                	});
+               $(tst_list_remove).append(tst_list_div);
+               $(tst_sel_remove_div).append(tst_sel_remove_button);
+               $(tst_list_remove).append(tst_sel_remove_div);
+               $(tst_list_btn).append(tst_list_remove);
+                $(tst_sel_test_list_modal).append(tst_list_btn);
+                
+                }//for loop
+                 var tst_sel_close_book = document.createElement('div');
+                 $(tst_sel_close_book).css('marginTop','20px');
                  var tst_sel_close_button = document.createElement('button');
-               $(tst_sel_close_button).html("Close");
+               $(tst_sel_close_button).html("Add more");
                $(tst_sel_close_button).css("background" ,"#ea494f");
                $(tst_sel_close_button).css('color','white');
                $(tst_sel_close_button).css('border','0px');
-               $(tst_sel_close_button).css('marginTop','3%');
-               //$(tst_sel_close_button).css('marginRight','23px');
+               $(tst_sel_close_button).css('paddingLeft','6px');
                $(tst_sel_close_button).css('borderRadius','5px');
-               $(tst_sel_close_button).css('width','10%');
+               $(tst_sel_close_button).css('paddingRight','6px');
                $(tst_sel_close_button).css('fontWeight','bold');
+               
                 var tst_sel_book_button = document.createElement('button');
                $(tst_sel_book_button).html("Book");
                $(tst_sel_book_button).css("background" ,"#ea494f");
                $(tst_sel_book_button).css('color','white');
                $(tst_sel_book_button).css('border','0px');
-               $(tst_sel_book_button).css('marginTop','3%');
-               //$(tst_sel_close_button).css('marginRight','23px');
+               //$(tst_sel_book_button).css('marginTop','3%');
                $(tst_sel_book_button).css('borderRadius','5px');
                $(tst_sel_book_button).css('width','10%');
                $(tst_sel_book_button).css('fontWeight','bold');
                $(tst_sel_book_button).css('float','right');
-               $(tst_sel_book_button).css('marginRight','3%');
-               $(tst_sel_test_list_modal).append(tst_sel_close_button);
-                 $(tst_sel_test_list_modal).append(tst_sel_book_button);
-                 $(tst_sel_test_close_element).on('click',function () 
+               $(tst_sel_book_button).css('marginRight','20px');
+               $(tst_sel_book_button).css('paddingLeft','6px');
+               $(tst_sel_book_button).css('paddingRight','6px');
+               //$(tst_sel_test_list_modal).append(tst_sel_close_button);
+                 //$(tst_sel_test_list_modal).append(tst_sel_book_button);
+                   $(tst_sel_close_book).append(tst_sel_close_button);
+                   $(tst_sel_close_book).append(tst_sel_book_button);
+                   $(tst_sel_test_list_modal).append(tst_sel_close_book);
+                   $(tst_sel_test_close_element).on('click',function () 
                  {
                  	 
                	  $(tst_sel_test_list_modal).modal().close(); 
