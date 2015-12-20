@@ -36,9 +36,6 @@ function tests_list_handler()
             //$(tst_sel_length).html("tests selected");
             var tst_btn_div = document.createElement('div');
             $(tst_btn_div).addClass("col-md-2");
-            //$(tst_btn_div).css('float','right');
-            //$(tst_btn_div).css('paddingRight','7%');
-            //$(tst_btn_div).css('paddingTop','1%');
             var tst_book_button = document.createElement('button');
             //$(tst_book_button).html("Book Now");
             $(tst_book_button).css('background','#ec4949');
@@ -75,7 +72,7 @@ function tests_list_handler()
             var tst_input_span_i = document.createElement('i');
             $(tst_input_span_i).addClass("fa fa-search");
              $(tst_input_span).append(tst_input_span_i);
-            
+              
             $(tst_search_ip_img).append(tst_search_input);
             $(tst_search_ip_img).append(tst_search_div_img);
             //$(tst_search_form).append(tst_search_input);
@@ -137,7 +134,9 @@ function tests_list_handler()
             $(tst_test_list_col).addClass("col-md-9");
             var tests_list = document.createElement('div');
             $(tests_list).addClass("tests_listbox");
+             
               for (i=0;i<data.testsList.length;i++) 
+            
             {
             	var tst_name_col = document.createElement('div');
             	$(tst_name_col).addClass("col-md-4");
@@ -145,48 +144,53 @@ function tests_list_handler()
             	 
             	var tst_det = document.createElement('div');
             	$(tst_det).addClass("test_details");
+            	$(tst_det).attr('id', data.testsList[i].testSlug);
             	var tst_chk_box = document.createElement('div');
             	$(tst_chk_box).addClass("check_box");
             	 var tst_chkbox_input = document.createElement('input');
                 $(tst_chkbox_input).addClass("package_chk");
                 $(tst_chkbox_input).attr('type','checkbox');
                 $(tst_chkbox_input).attr('id','test_check');
+                $(tst_chkbox_input).attr('id', data.testsList[i].testSlug);
                 $(tst_chkbox_input).attr('name','test_checked');
                 $(tst_chkbox_input).attr('value',data.testsList[i].testName);
                 $(tst_chkbox_input).attr('data-testname',data.testsList[i].testName);
                 $(tst_chkbox_input).attr('data-testslug',data.testsList[i].testSlug);
                 $(tst_chk_box).append(tst_chkbox_input);
-                 $(tst_chk_box).on('click',function () 
-              {
-              	   //alert("click");
-              	   console.log("click");
-              	   var chkboxarray = [];
-              	    $('input[name="test_checked"]:checked').each(function() 
-            {
-             
-               chkboxarray.push($(this).val());
-               var t_l = chkboxarray.length;
-               console.log(chkboxarray.length);
-               if (chkboxarray.length >= 1) 
-               {
-               $(tst_book_button).html("Book Now");
-               $(tst_sel_length).css('fontWeight','bold');
-               $(tst_sel_length).html("No of tests selected"+":"+t_l);
-              }
-             });
-                  //check_handler();     	
-              	});
-                var tst_name_p = document.createElement('p');
+                 var tst_name_p = document.createElement('p');
                 $(tst_name_p).html(data.testsList[i].testName);
                 $(tst_name_p).attr('title',data.testsList[i].testName);
-                $(tst_name_p).attr('id','data.testsList[j].testSlug');
+                $(tst_name_p).attr('id',data.testsList[i].testSlug);
                 $(tst_name_p).css('maxHeight','25px');
                 $(tst_name_p).css('overflow','hidden');
                 $(tst_det).append(tst_chk_box);
                 $(tst_det).append(tst_name_p);
                 $(tst_name_col).append(tst_det);
                 $(tests_list).append(tst_name_col);
-            }//for loop
+                $(tst_chk_box).on('click',function () 
+                {
+              	    
+              	   var chkboxarray = [];
+              	  $('input[name="test_checked"]:checked').each(function() 
+            {
+             
+               chkboxarray.push($(this).val());
+               var t_l = chkboxarray.length;
+               if (chkboxarray.length >= 1) 
+               {
+         
+               
+               $(tst_book_button).html("Book Now");
+               $(tst_book_button).css('paddingLeft','6px');
+               $(tst_book_button).css('paddingRight','6px');
+               $(tst_sel_length).css('fontWeight','bold');
+               $(tst_sel_length).html("No of tests selected"+":"+t_l);
+              }
+                       	
+              	}); 
+             });
+            
+            
             $(tst_search_form).on('keyup',function () 
            {
            	$(tst_search_div_img).append(tst_search_img);
@@ -195,9 +199,10 @@ function tests_list_handler()
              {
            	  var tst_search_name = document.getElementById(data.testsList[j].testName);
            	   var tst_title = document.getElementById(data.testsList[j].testSlug);
+           	    
            	      test_search_handler(tst_search_name,tst_title) ;
-             	   }//
-           	});//key event
+             	   }// for 
+           	});//key event 
            	$(tst_search_div_img).on('click',function () 
            	{
                   $(tst_search_input).val("");
@@ -211,7 +216,7 @@ function tests_list_handler()
                    }//for loop	
                              	$("#tst_search").focus();
                              	
-           		});//click
+           		});//click 
             $(tst_btn_div).on('click',function () 
             {
                var chkboxarray = [];
@@ -221,17 +226,17 @@ function tests_list_handler()
              
                chkboxarray.push($(this).val());
                 new_array.push($(this).data('testslug'));
-                console.log(chkboxarray);
-                console.log(chkboxarray.length);
+                loadingimage_handler();
                 sel_test_list(chkboxarray,new_array)
               }); 	
               if (chkboxarray.length == "0") 
               {
-              	   console.log("not");
+              	   
               	   test_not_sel_hndlr();
               }
              });//click 
-              $("#test_check").on('click',function () 
+              
+              /*$("#test_check").on('click',function () 
               {
               	   //alert("click");
               	   //console.log("click");
@@ -243,25 +248,16 @@ function tests_list_handler()
                console.log(chkboxarray.length);
               });
                   check_handler();     	
-              	});
-                          
-             $(tst_test_list_col).append(tests_list);
+              	});*/
+              }           
+               
+              $(tst_test_list_col).append(tests_list);
               $(tst_list_row).append(tst_test_list_col);
               $(cust_container).append(tst_list_row);
       }//success
   });//ajax
 }//fnct hndlr
 window.onload = tests_list_handler();
-function check_handler()
-{
-if (document.getElementById('test_check').checked) 
-{
-     alert("checked");
- } else 
- {
-      alert("You didn't check it! Let me check it for you.");
-  }
-}
 function test_search_handler(tst_search_name,tst_title) 
 {
 	
@@ -313,15 +309,7 @@ function test_search_handler(tst_search_name,tst_title)
         {
                   $(tst_left_name).html(left_tst);
          }//else
-         var tst_length = tst_left_name.length+tst_str_name.length+tst_right_name.length;
-         if (tst_length == "31") 
-         {
-         	$(tst_title).css('paddingBottom','35px');
-         }
-        //$(tst_title).append(tst_left_name);
-        //$(tst_title).append(tst_str_name);
-        //$(tst_title).append(tst_right_name);
- }//if tst
+         }//if tst
 else 
 {
 	 $(tst_search_name).css('display','none');
@@ -436,16 +424,17 @@ function sel_test_list(chkboxarray,new_array)
                $(tst_sel_remove_button).css('fontWeight','bold');
                $(tst_sel_remove_button).css('float','right');
                $(tst_sel_remove_button).css('fontSize','10px');
-               console.log(chkboxarray[i]);
+                var t_rem = document.getElementById(chkboxarray[i]);
+               
                $(tst_sel_remove_button).on('click',function () 
                 {
-                	  console.log(chkboxarray[i]);
-                	 var t_rem = document.getElementById(chkboxarray[i]);
-                	 console.log(document.getElementById(chkboxarray[i]));
-                	 console.log(t_rem);
-                   $(t_rem).css('display','none'); 
-                  //$(this).css('display','none');               	 
-                	  console.log("remove");
+                	 
+                   for (var j=0;j<chkboxarray.length;j++) 
+                {
+                	 var t_rem = document.getElementById(chkboxarray[j]);
+                	 console.log(t_rem.length);
+                   $(t_rem).css('display','none');               	 
+                }//for remove
                 	});
                $(tst_list_remove).append(tst_list_div);
                $(tst_sel_remove_div).append(tst_sel_remove_button);
@@ -471,7 +460,6 @@ function sel_test_list(chkboxarray,new_array)
                $(tst_sel_book_button).css("background" ,"#ea494f");
                $(tst_sel_book_button).css('color','white');
                $(tst_sel_book_button).css('border','0px');
-               //$(tst_sel_book_button).css('marginTop','3%');
                $(tst_sel_book_button).css('borderRadius','5px');
                $(tst_sel_book_button).css('width','10%');
                $(tst_sel_book_button).css('fontWeight','bold');
@@ -479,12 +467,10 @@ function sel_test_list(chkboxarray,new_array)
                $(tst_sel_book_button).css('marginRight','20px');
                $(tst_sel_book_button).css('paddingLeft','6px');
                $(tst_sel_book_button).css('paddingRight','6px');
-               //$(tst_sel_test_list_modal).append(tst_sel_close_button);
-                 //$(tst_sel_test_list_modal).append(tst_sel_book_button);
-                   $(tst_sel_close_book).append(tst_sel_close_button);
-                   $(tst_sel_close_book).append(tst_sel_book_button);
-                   $(tst_sel_test_list_modal).append(tst_sel_close_book);
-                   $(tst_sel_test_close_element).on('click',function () 
+               $(tst_sel_close_book).append(tst_sel_close_button);
+               $(tst_sel_close_book).append(tst_sel_book_button);
+               $(tst_sel_test_list_modal).append(tst_sel_close_book);
+               $(tst_sel_test_close_element).on('click',function () 
                  {
                  	 
                	  $(tst_sel_test_list_modal).modal().close(); 
@@ -497,9 +483,7 @@ function sel_test_list(chkboxarray,new_array)
                  });//click
                  
                  $(tst_sel_book_button).on('click',function () 
-                 {
-                   	
-                     //tst_off_lab_handler(chkboxarray,new_array); 
+                 { 
                      loadingimage_handler();
                      tests_off_labs_list_handler(chkboxarray,new_array);              	
                  	}); 
