@@ -75,7 +75,6 @@ function tests_list_handler()
               
             $(tst_search_ip_img).append(tst_search_input);
             $(tst_search_ip_img).append(tst_search_div_img);
-            //$(tst_search_form).append(tst_search_input);
             $(tst_search_form).append(tst_search_ip_img);
             $(tst_search_form).append(tst_input_span);
             $(tst_search_cont).append(tst_search_form);
@@ -135,7 +134,7 @@ function tests_list_handler()
             var tests_list = document.createElement('div');
             $(tests_list).addClass("tests_listbox");
              
-              for (i=0;i<data.testsList.length;i++) 
+              for (var i=0;i<20;i++) 
             
             {
             	var tst_name_col = document.createElement('div');
@@ -144,14 +143,14 @@ function tests_list_handler()
             	 
             	var tst_det = document.createElement('div');
             	$(tst_det).addClass("test_details");
-            	$(tst_det).attr('id', data.testsList[i].testSlug);
+            	//$(tst_det).attr('id', data.testsList[i].testSlug);
             	var tst_chk_box = document.createElement('div');
             	$(tst_chk_box).addClass("check_box");
             	 var tst_chkbox_input = document.createElement('input');
                 $(tst_chkbox_input).addClass("package_chk");
                 $(tst_chkbox_input).attr('type','checkbox');
-                $(tst_chkbox_input).attr('id','test_check');
-                $(tst_chkbox_input).attr('id', data.testsList[i].testSlug);
+                //$(tst_chkbox_input).attr('id','test_check');
+                $(tst_chkbox_input).attr('id',data.testsList[i].minFinalPrice)
                 $(tst_chkbox_input).attr('name','test_checked');
                 $(tst_chkbox_input).attr('value',data.testsList[i].testName);
                 $(tst_chkbox_input).attr('data-testname',data.testsList[i].testName);
@@ -167,35 +166,59 @@ function tests_list_handler()
                 $(tst_det).append(tst_name_p);
                 $(tst_name_col).append(tst_det);
                 $(tests_list).append(tst_name_col);
-                $(tst_chk_box).on('click',function () 
-                {
+               
+              //  $(tst_chk_box).on('click',function () 
+                //{
               	    
-              	   var chkboxarray = [];
-              	  $('input[name="test_checked"]:checked').each(function() 
-            {
+              	   //var chkboxarray = [];
+                  //JSON.stringify(chkboxarray);
+               //localStorage.setItem("selarray",JSON.stringify(chkboxarray));
+
+              	  /* for (var chk=0;chk<20;chk++) 
+              	   {
+              	    
+                   	document.getElementById (data.testsList[chk].minFinalPrice).addEventListener ("click", function () {
+                    
+                   	console.log(document.getElementById(data.testsList[chk].minFinalPrice));
+                if (document.getElementById(data.testsList[chk].minFinalPrice).checked) {
+            	chkboxarray.push($(this).val());
+                console.log(chkboxarray);
+            }//if
+            else {
+            	chkboxarray.push($(this).val());
+            	console.log(chkboxarray);
+                
+            }//else
+        }); 
+          }//for chk   */
+             	
+             /* $('input[name="test_checked"]:checked').each(function() 
+               {
              
                chkboxarray.push($(this).val());
+               JSON.stringify(chkboxarray);
+               localStorage.setItem("selarray",JSON.stringify(chkboxarray));
                var t_l = chkboxarray.length;
+               var ip_checked =  $(this).parent().parent();
+            	$(ip_checked).css('background','rgba(236,246,248,0.99)');
                if (chkboxarray.length >= 1) 
                {
-         
-               
                $(tst_book_button).html("Book Now");
                $(tst_book_button).css('paddingLeft','6px');
                $(tst_book_button).css('paddingRight','6px');
                $(tst_sel_length).css('fontWeight','bold');
                $(tst_sel_length).html("No of tests selected"+":"+t_l);
-              }
+              }//if length
                        	
-              	}); 
-             });
+              	});//checked each  */
+           // });//click
             
             
-            $(tst_search_form).on('keyup',function () 
+           $(tst_search_form).on('keyup',function () 
            {
            	$(tst_search_div_img).append(tst_search_img);
            	  $(tst_search_div_img).css('display','block')
-             for (var j=0;j<data.testsList.length;j++) 
+             for (var j=0;j<20;j++) 
              {
            	  var tst_search_name = document.getElementById(data.testsList[j].testName);
            	   var tst_title = document.getElementById(data.testsList[j].testSlug);
@@ -206,7 +229,7 @@ function tests_list_handler()
            	$(tst_search_div_img).on('click',function () 
            	{
                   $(tst_search_input).val("");
-                   for (var tst=0;tst<data.testsList.length;tst++) 
+                   for (var tst=0;tst<20;tst++) 
                    {
                    	 var tst_input_click = document.getElementById(data.testsList[tst].testName);
                    	 $(tst_input_click).css('display','block');
@@ -216,44 +239,84 @@ function tests_list_handler()
                    }//for loop	
                              	$("#tst_search").focus();
                              	
-           		});//click 
-            $(tst_btn_div).on('click',function () 
+           		});//click  
+            /*$(tst_btn_div).on('click',function () 
             {
-               var chkboxarray = [];
-               var new_array = [];
-            $('input[name="test_checked"]:checked').each(function() 
+                     var chkboxarray = [];
+            		   var new_array = [];																																																																
+           /* $('input[name="test_checked"]:checked').each(function() 
+         
             {
-             
-               chkboxarray.push($(this).val());
+            	   
+                chkboxarray.push($(this).val());
+                 //JSON.stringify(chkboxarray);
                 new_array.push($(this).data('testslug'));
                 loadingimage_handler();
-                sel_test_list(chkboxarray,new_array)
-              }); 	
-              if (chkboxarray.length == "0") 
+                sel_test_list(chkboxarray);
+              }); */ 	
+              /* var chkboxarray = [];
+                  JSON.stringify(chkboxarray);
+               localStorage.setItem("selarray",JSON.stringify(chkboxarray));
+
+              	   for (var chk=0;chk<data.testsList.length;chk++) 
+              	   {
+              	    
+                   	document.getElementById (data.testsList[chk].minFinalPrice).addEventListener ("click", function () {
+                   	console.log(document.getElementById(data.testsList[chk].minFinalPrice));
+                if (document.getElementById(data.testsList[chk].minFinalPrice).checked) {
+            	chkboxarray.push($(this).val());
+                console.log(chkboxarray);
+                loadingimage_handler();
+                sel_test_list(chkboxarray);
+            }//if
+            else {
+            	chkboxarray.push($(this).val());
+            	console.log(chkboxarray);
+                
+            }//else
+        }); 
+          }//for chk   
+             	
+
+           
+              /*if (chkboxarray.length == "0") 
               {
               	   
               	   test_not_sel_hndlr();
-              }
-             });//click 
-              
-              /*$("#test_check").on('click',function () 
-              {
-              	   //alert("click");
-              	   //console.log("click");
-              	   var chkboxarray = [];
-              	    $('input[name="test_checked"]:checked').each(function() 
-            {
-             
-               chkboxarray.push($(this).val());
-               console.log(chkboxarray.length);
-              });
-                  check_handler();     	
-              	});*/
-              }           
+              } */
+            // });//click 
+             }  //for    	     
                
               $(tst_test_list_col).append(tests_list);
               $(tst_list_row).append(tst_test_list_col);
               $(cust_container).append(tst_list_row);
+              var sel_array = [];
+              for(var bg =0 ;bg<20; bg++)
+              {
+              var test_input = document.getElementById(data.testsList[bg].minFinalPrice);
+                if (test_input.addEventListener) {
+                test_input.addEventListener ("click", OnChangeCheckbox, false);
+            }//if listener
+       
+        function OnChangeCheckbox (event) {
+           var test_input = event.target;
+            if (test_input.checked) {
+            	sel_array.push($(this).val());
+                
+                var test_length = sel_array.length;
+                $(tst_book_button).html("Book Now");
+               $(tst_book_button).css('paddingLeft','6px');
+               $(tst_book_button).css('paddingRight','6px');
+               $(tst_sel_length).css('fontWeight','bold');
+               $(tst_sel_length).html("No of tests selected"+":"+test_length);
+               $(tst_book_button).on('click',function () 
+               {
+                 loadingimage_handler();
+                 sel_test_list(sel_array);
+               });// btn click
+            } //if checked
+           }//fnctn  
+              }//for ng
       }//success
   });//ajax
 }//fnct hndlr
@@ -360,9 +423,11 @@ else
                 $('#labtest_modal').append(modal_labtest_footer);
                  return false;
     }//fnctn
-function sel_test_list(chkboxarray,new_array)
+function sel_test_list(sel_array)
  {
  	           
+ 	           var localdata =  localStorage.getItem("selarray");
+ 	            //console.log(localdata);
  	            var tst_checked = $('input[name="test_checked"]:checked').length;
  	            var tst_sel_test_list_modal = document.createElement('div');
                $(tst_sel_test_list_modal).addClass("modal");
@@ -395,12 +460,12 @@ function sel_test_list(chkboxarray,new_array)
                $(tst_list_heading).css('marginTop','20px');
                 $(tst_sel_test_list_modal).append(tst_list_heading);
                 var tst_list_table = document.createElement('table');
-                //console.log(chkboxarray.length);
-                for (i=0;i<chkboxarray.length;i++) 
+                for (i=0;i<sel_array.length;i++) 
                 {
                  var tst_list_btn = document.createElement('div');
                  $(tst_list_btn).addClass("list_test");
-                 $(tst_list_btn).attr('id',chkboxarray[i]);
+                 //$(tst_list_btn).attr('id',localdata[i]);
+                 $(tst_list_btn).attr('id',sel_array[i]);
                 var tst_list_remove = document.createElement('div');
                 $(tst_list_remove).css('border','1px solid #ddd');
                 $(tst_list_remove).attr('id','sel_test_list');
@@ -408,8 +473,7 @@ function sel_test_list(chkboxarray,new_array)
                 //$(tst_list_remove).css('width','554px');
                 var tst_list_div = document.createElement('div');
                 
-                $(tst_list_div).html("&nbsp"+"&nbsp"+"&nbsp"+chkboxarray[i]);
-                //$(tst_list_div).css('border','1px solid #ddd');
+                $(tst_list_div).html("&nbsp"+"&nbsp"+"&nbsp"+sel_array[i]);
                 $(tst_list_div).css('float','left');
                 var tst_sel_remove_div = document.createElement('div');
                 $(tst_sel_remove_div).css('paddingTop','3px');
@@ -424,18 +488,20 @@ function sel_test_list(chkboxarray,new_array)
                $(tst_sel_remove_button).css('fontWeight','bold');
                $(tst_sel_remove_button).css('float','right');
                $(tst_sel_remove_button).css('fontSize','10px');
-                var t_rem = document.getElementById(chkboxarray[i]);
-               
+                
+                 
                $(tst_sel_remove_button).on('click',function () 
                 {
                 	 
-                   for (var j=0;j<chkboxarray.length;j++) 
-                {
-                	 var t_rem = document.getElementById(chkboxarray[j]);
-                	 console.log(t_rem.length);
-                   $(t_rem).css('display','none');               	 
-                }//for remove
-                	});
+                    var test_sel = $(this).parent().parent();
+                    var test_text =test_sel.text();
+                    var test_text_length = test_text.length;
+                    var test_sub= test_text_length-6;
+                    var last_five = test_text.substr(0,test_sub);	
+                    $(test_sel).css('display','none');
+                    $('input[name="test_checked"]:checked').prop('checked',false);
+                   
+                 	});//on click
                $(tst_list_remove).append(tst_list_div);
                $(tst_sel_remove_div).append(tst_sel_remove_button);
                $(tst_list_remove).append(tst_sel_remove_div);
@@ -445,7 +511,7 @@ function sel_test_list(chkboxarray,new_array)
                 }//for loop
                  var tst_sel_close_book = document.createElement('div');
                  $(tst_sel_close_book).css('marginTop','20px');
-                 var tst_sel_close_button = document.createElement('button');
+               var tst_sel_close_button = document.createElement('button');
                $(tst_sel_close_button).html("Add more");
                $(tst_sel_close_button).css("background" ,"#ea494f");
                $(tst_sel_close_button).css('color','white');
@@ -485,7 +551,7 @@ function sel_test_list(chkboxarray,new_array)
                  $(tst_sel_book_button).on('click',function () 
                  { 
                      loadingimage_handler();
-                     tests_off_labs_list_handler(chkboxarray,new_array);              	
+                     //tests_off_labs_list_handler(chkboxarray,new_array);              	
                  	}); 
                $(tst_sel_test_list_modal).modal().open();
               
