@@ -1,13 +1,11 @@
  var tst_host_api = "http://beta.zotey.com/m-api"; 
  var tst_categories = "All-Categories";
- //localStorage.setItem("slugarray",JSON.stringify([]));
  localStorage.removeItem("slugarray");
  var slug_array = [];
  localStorage.setItem("slugarray",JSON.stringify(slug_array));
 function changecheckbox(event) 
   {
   	  var test_input = event.target;
-     //var slug_array = localStorage.getItem("slugarray");
      if (test_input.checked)
      {
        slug_array.push([$(this).data('testslug'), $(this).val()]);
@@ -182,7 +180,7 @@ function tests_list_handler()
             $(tst_test_list_col).addClass("col-md-9");
             var tests_list = document.createElement('div');
             $(tests_list).addClass("tests_listbox");
-            for (var i=0;i<20;i++) 
+            for (var i=0;i<data.testsList.length;i++) 
             {
               var tst_name_col = document.createElement('div');
               $(tst_name_col).addClass("col-md-4");
@@ -215,7 +213,7 @@ function tests_list_handler()
               {
            	    $(tst_search_div_img).append(tst_search_img);
            	    $(tst_search_div_img).css('display','block')
-                for (var j=0;j<20;j++) 
+                for (var j=0;j<data.testsList.length;j++) 
                 {
            	      var tst_search_name = document.getElementById(data.testsList[j].testName);
            	      var tst_title = document.getElementById(data.testsList[j].testSlug);
@@ -225,7 +223,7 @@ function tests_list_handler()
            	 $(tst_search_div_img).on('click',function () 
            	 {
                  $(tst_search_input).val("");
-                 for (var tst=0;tst<20;tst++) 
+                 for (var tst=0;tst<data.testsList.length;tst++) 
                  {
                     var tst_input_click = document.getElementById(data.testsList[tst].testName);
                     $(tst_input_click).css('display','block');
@@ -239,7 +237,7 @@ function tests_list_handler()
          $(tst_test_list_col).append(tests_list);
          $(tst_list_row).append(tst_test_list_col);
          $(cust_container).append(tst_list_row);
-         for(var ip_check =0 ;ip_check<20; ip_check++)
+         for(var ip_check =0 ;ip_check<data.testsList.length; ip_check++)
          {
             var test_input = document.getElementById(data.testsList[ip_check].testSlug+"_input");
          }//for ip_check
@@ -359,12 +357,12 @@ else
 function remove_handler()
  {
  	  var tst_btn_id = this.id;
- 	  console.log(tst_btn_id);
  	  var tst_ip_id = document.getElementById(this.id+"_input");
- 	  //$(tst_ip_id).attr('checked',false);
- 	  console.log(document.getElementById(this.id+"_input").checked = false);
+ 	  $(tst_ip_id).attr('checked',false);
      var test_sel = $(this).parent().parent();
      $(test_sel).css('display','none');	
+     var tst_num_element = document.getElementById("tst_length");
+     $(tst_num_element).html('');
      var tst_local_data = JSON.parse(localStorage.getItem("slugarray"));
  	  var sel_temp_array = [];
  	  for (var i=0;i<tst_local_data.length;i++) 
@@ -372,20 +370,22 @@ function remove_handler()
        if (tst_btn_id.localeCompare(tst_local_data[i][0])) 
        {
           sel_temp_array.push(tst_local_data[i]);
-          console.log(sel_temp_array);
        }//if loc comp
-       
      }//for loop 
      slug_array = sel_temp_array;
      localStorage.setItem("slugarray",JSON.stringify(slug_array));
-     console.log(JSON.parse(localStorage.getItem("slugarray")));
-     var tst_ip_length = JSON.parse(localStorage.getItem("slugarray"));
-     for (j=0;j<tst_ip_length.length;j++) 
+     var tst = JSON.parse(localStorage.getItem("slugarray"));
+     if (tst.length == 0) 
      {
-     	  var ip = document.getElementById(tst_ip_length[j][0]+"_input");
-     	  console.log(document.getElementById(tst_ip_length[j][0]+"_input"));
-     	  //$(ip).attr('checked',false);
-     }//for
+     	  $(tst_num_element).html('');
+     	  var tst_rem_book_btn = document.getElementsByClassName("book_btn")[0];
+        $(tst_rem_book_btn).html('');
+        $("#modal_test_firstpage").modal().close();
+     }//if tst lnth
+     else
+     {
+     $(tst_num_element).html("No of tests selected"+":"+tst.length);
+     }//else tst lnth
  }//fnctn chkng handler
 function sel_test_list()
  {
