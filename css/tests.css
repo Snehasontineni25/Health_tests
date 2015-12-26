@@ -92,6 +92,14 @@ li
 {
  background:rgba(236,246,248,0.99) !important;
 }
+.test_name:nth-child(2n)
+{
+  background:rgba(236,246,248,0.99) !important;
+}
+.test_name
+{
+  border: 1px solid #ddd !important;
+}
   .datetimepicker 
 {
   left:666px !important;
