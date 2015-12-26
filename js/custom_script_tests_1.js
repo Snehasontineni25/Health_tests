@@ -2038,6 +2038,7 @@ function tst_form_handler(tst_sel_onlinereport,tst_sel_type,tst_sel_labslug,tst_
                   $(tst_patient_details_table).addClass("tst_ptnt_details");
                   var tst_patient_table_head_tr = document.createElement('tr');
                   $(tst_patient_table_head_tr).css('background','rgb(65, 167, 179)');
+                  $(tst_patient_table_head_tr).css('border','1px solid rgb(65, 167, 179)');
                   var tst_patient_table_head_td =document.createElement('td');
                   $(tst_patient_table_head_td).html("&nbsp"+"&nbsp"+"Patient Information");
                   $(tst_patient_table_head_td).css('color','white');
@@ -2192,6 +2193,7 @@ function tst_form_handler(tst_sel_onlinereport,tst_sel_type,tst_sel_labslug,tst_
                   $(local_tst_table_td).css('background','rgb(65, 167, 179)');
                   $(local_tst_table_td).css('color','white');
                   $(local_tst_table_td).css('fontWeight','bold');
+                  $(local_tst_table_td).css('border','1px solid rgb(65, 167, 179)');
                   $(local_tst_table_tr).append(local_tst_table_td);
                   $(local_tst_table).append(local_tst_table_tr);
                   for (var i=0;i<tst_local_slug.length;i++) 

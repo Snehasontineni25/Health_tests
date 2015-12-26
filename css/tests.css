@@ -161,3 +161,8 @@ li
 {
   background:rgba(236,246,248,0.99) !important;
 }
+#tmm-form-wizard
+{
+  padding-left: 0px;
+  padding-right: 0px;
+}
