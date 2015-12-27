@@ -1,4 +1,4 @@
- var tst_host_api = "http://beta.zotey.com/m-api"; 
+  var tst_host_api = "http://beta.zotey.com/m-api"; 
  var tst_categories = "All-Categories";
  localStorage.removeItem("slugarray");
  localStorage.removeItem("final_slugarray");
@@ -11,6 +11,7 @@ function changecheckbox(event)
      if (test_input.checked)
      {
        slug_array.push([$(this).data('testslug'), $(this).val()]);
+       $(this).parent().parent().css('background','rgba(236,246,248,0.99)');
      } //if checked
      else 
      {
@@ -22,6 +23,7 @@ function changecheckbox(event)
             if (remove_test_slug.localeCompare(slug_array[slug_tst][0])) 
             {
                slug_temp_array.push(slug_array[slug_tst]);
+               $(this).parent().parent().css('background','white');
             }//if
         }//for loop
         slug_array = slug_temp_array;
@@ -36,7 +38,7 @@ function changecheckbox(event)
      $(tst_book_btn).css('paddingRight','6px');
      var sel_tst_count = document.getElementById("tst_length");
      $(sel_tst_count).css('fontWeight','bold');
-     $(sel_tst_count).html("No of tests selected"+":"+test_length);
+     $(sel_tst_count).html("No of tests selected"+":"+"&nbsp;"+"&nbsp;"+"&nbsp;"+test_length+"&nbsp;"+"&nbsp;"+"&nbsp;"+"&nbsp;");
     }//if tst lnth 
     else 
     {
@@ -73,26 +75,23 @@ function tests_list_handler()
 	         var cust_container = document.getElementsByClassName("cust-container")[0];
 	         var tst_heading_row = document.createElement('div');
             $(tst_heading_row).addClass("row m-z");
-            var tst_list = document.createElement('div');
-            $(tst_list).addClass("test-cat-list");
+            $(tst_heading_row).css('width','100%');
+            $(tst_heading_row).css('position','fixed');
+            $(tst_heading_row).css('zIndex','99');
+            $(tst_heading_row).css('background','white');
             var tst_list_col = document.createElement('div');
             $(tst_list_col).addClass("col-md-3");
-            var tst_row_deals_head = document.createElement('div');
-            $(tst_row_deals_head).addClass("row s-deals-heading");
             var tst_head_element = document.createElement('h2');
             $(tst_head_element).html("Health Tests");
-            $(tst_row_deals_head).append(tst_head_element);
-            $(tst_list_col).append(tst_row_deals_head);
-            var tst_search_book_col = document.createElement('div');
-            $(tst_search_book_col).addClass("col-md-9");
-            $(tst_search_book_col).css('marginTop','12px');
-            //$(tst_search_book_col).html("length");
+            $(tst_head_element).css('color', 'rgb(65, 167, 179)');
+            $(tst_head_element).css('fontWeight','bold');
+            $(tst_head_element).css('fontSize','18px');
+            $(tst_list_col).append(tst_head_element);
+            var tst_sel_head_row = document.createElement('div');
+            $(tst_sel_head_row).addClass("col-md-5");
             var tst_sel_length = document.createElement('div');
-            $(tst_sel_length).addClass("col-md-3");
             $(tst_sel_length).attr('id',"tst_length");
-            //$(tst_sel_length).html("tests selected");
-            var tst_btn_div = document.createElement('div');
-            $(tst_btn_div).addClass("col-md-2");
+            $(tst_sel_length).css('float','left');
             var tst_book_button = document.createElement('button');
             $(tst_book_button).addClass("book_btn");
             $(tst_book_button).css('background','#ec4949');
@@ -136,24 +135,22 @@ function tests_list_handler()
             $(tst_search_form).append(tst_input_span);
             $(tst_search_cont).append(tst_search_form);
             $(tst_search_col).append(tst_search_cont);
-            $(tst_btn_div).append(tst_book_button);
-            $(tst_list).append(tst_list_col);
-            $(tst_search_book_col).append(tst_sel_length);
-            $(tst_search_book_col).append(tst_btn_div);
-            $(tst_search_book_col).append(tst_search_col);
-            $(tst_list).append(tst_search_book_col);
-            $(tst_heading_row).append(tst_list);
+            $(tst_sel_head_row).append(tst_sel_length);
+            $(tst_sel_head_row).append(tst_book_button); 
+            $(tst_heading_row).append(tst_list_col);
+            $(tst_heading_row).append(tst_sel_head_row);
+            $(tst_heading_row).append(tst_search_col);
             $(cust_container).append(tst_heading_row);
             var tst_list_row = document.createElement('div');
             $(tst_list_row).addClass("row");
             $(tst_list_row).css('background','#fff');
+            $(tst_list_row).css('paddingTop','34px');
             var tst_prjct_col = document.createElement('div');
             $(tst_prjct_col).addClass("col-md-3 pad0");
             var tst_prjct_list_cont = document.createElement('div');
             $(tst_prjct_list_cont).addClass("projct-list-cont");
-            var tst_prjct_list = document.createElement('div');
-            $(tst_prjct_list).addClass("project-list");
             var tst_prjct_ul = document.createElement('ul');
+            $(tst_prjct_ul).addClass("list-group");
             var tst_prjct_li_alltests= document.createElement('li');
             var tst_prjct_a_alltests = document.createElement('a');
             $(tst_prjct_a_alltests).addClass("test-active-color");
@@ -162,19 +159,19 @@ function tests_list_handler()
             $(tst_prjct_li_alltests).append(tst_prjct_a_alltests);
             var tst_prjct_li_allergytests = document.createElement('li');
             var tst_prjct_a_allergytest = document.createElement('a');
-            $(tst_prjct_a_allergytest).attr('href','health-tests?c_id=30');
+            $(tst_prjct_a_allergytest).attr('href','health-tests/AllergyTests');
             $(tst_prjct_a_allergytest).addClass("");
             $(tst_prjct_a_allergytest).html("Allergy Tests");
             $(tst_prjct_li_allergytests).append(tst_prjct_a_allergytest);
             var tst_prjct_li_cardiactests = document.createElement('li');
             var tst_prjct_a_cardiactests = document.createElement('a');
-            $(tst_prjct_a_cardiactests).attr('href','health-tests?c_id=31');
+            $(tst_prjct_a_cardiactests).attr('href','health-tests/CardiacTests');
             $(tst_prjct_a_cardiactests).addClass("");
             $(tst_prjct_a_cardiactests).html("Cardiac Tests");
             $(tst_prjct_li_cardiactests).append(tst_prjct_a_cardiactests);
             var tst_prjct_li_diabetictests = document.createElement('li');
             var tst_prjct_a_diabetictests = document.createElement('a');
-            $(tst_prjct_a_diabetictests).attr('href','health-tests?c_id=29');
+            $(tst_prjct_a_diabetictests).attr('href','health-tests/DiabeticTests');
             $(tst_prjct_a_diabetictests).addClass("");
             $(tst_prjct_a_diabetictests).html("Diabetic Tests");
             $(tst_prjct_li_diabetictests).append(tst_prjct_a_diabetictests);
@@ -182,22 +179,20 @@ function tests_list_handler()
             $(tst_prjct_ul).append(tst_prjct_li_allergytests);
             $(tst_prjct_ul).append(tst_prjct_li_cardiactests);
             $(tst_prjct_ul).append(tst_prjct_li_diabetictests);
-            $(tst_prjct_list).append(tst_prjct_ul);
-            $(tst_prjct_list_cont).append(tst_prjct_list);
+            $(tst_prjct_list_cont).append(tst_prjct_ul);
             $(tst_prjct_col).append(tst_prjct_list_cont);
             $(tst_list_row).append(tst_prjct_col);
             var tst_test_list_col =  document.createElement('div');
             $(tst_test_list_col).addClass("col-md-9");
             var tests_list = document.createElement('div');
             $(tests_list).addClass("tests_listbox");
-            for (var i=0;i<20;i++) 
+            for (var i=0;i<data.testsList.length;i++) 
             {
               var tst_name_col = document.createElement('div');
               $(tst_name_col).addClass("col-md-4");
               $(tst_name_col).attr('id',data.testsList[i].testName);
               var tst_det = document.createElement('div');
               $(tst_det).addClass("test_details");
-              //$(tst_det).attr('id', data.testsList[i].testSlug);
               var tst_chk_box = document.createElement('div');
               $(tst_chk_box).addClass("check_box");
               var tst_chkbox_input = document.createElement('input');
@@ -223,7 +218,7 @@ function tests_list_handler()
               {
            	    $(tst_search_div_img).append(tst_search_img);
            	    $(tst_search_div_img).css('display','block')
-                for (var j=0;j<20;j++) 
+                for (var j=0;j<data.testsList.length;j++) 
                 {
            	      var tst_search_name = document.getElementById(data.testsList[j].testName);
            	      var tst_title = document.getElementById(data.testsList[j].testSlug);
@@ -247,7 +242,7 @@ function tests_list_handler()
          $(tst_test_list_col).append(tests_list);
          $(tst_list_row).append(tst_test_list_col);
          $(cust_container).append(tst_list_row);
-         for(var ip_check =0 ;ip_check<20; ip_check++)
+         for(var ip_check =0 ;ip_check<data.testsList.length; ip_check++)
          {
             var test_input = document.getElementById(data.testsList[ip_check].testSlug+"_input");
          }//for ip_check
@@ -271,6 +266,8 @@ function test_search_handler(tst_search_name,tst_title)
  	 var tst_id = tst_search_name.id;
  	 var tst_id_lowercase = tst_id.toLowerCase();
  	 var tst_id_lnth = tst_id.length;
+ 	 $(tst_title).html('');
+ 	 
   if (tst_val_exp.test(tst_id_lowercase)) 
   {
       $(tst_search_name).css('display','block');
@@ -313,6 +310,9 @@ function test_search_handler(tst_search_name,tst_title)
         {
                   $(tst_left_name).html(left_tst);
          }//else
+        $(tst_title).append(tst_left_name);
+        $(tst_title).append(tst_str_name);
+        $(tst_title).append(tst_right_name);
          }//if tst
 else 
 {
@@ -369,6 +369,7 @@ function remove_handler()
  	  var tst_btn_id = this.id;
  	  var tst_ip_id = document.getElementById(this.id+"_input");
  	  $(tst_ip_id).attr('checked',false);
+ 	  $(tst_ip_id).parent().parent().css('background','white');
      var test_sel = $(this).parent().parent();
      $(test_sel).css('display','none');	
      var tst_num_element = document.getElementById("tst_length");
@@ -394,11 +395,12 @@ function remove_handler()
      }//if tst lnth
      else
      {
-     $(tst_num_element).html("No of tests selected"+":"+tst.length);
+     $(tst_num_element).html("No of tests selected"+":"+"&nbsp;"+"&nbsp;"+"&nbsp;"+tst.length+"&nbsp;"+"&nbsp;"+"&nbsp;"+"&nbsp;");
      }//else tst lnth
  }//fnctn chkng handler
 function sel_test_list()
  {
+ 	 
  	  var tst_local_data = JSON.parse(localStorage.getItem("slugarray"));
  	  var tst_sel_test_list_modal = document.createElement('div');
      $(tst_sel_test_list_modal).addClass("modal");
@@ -731,7 +733,7 @@ function sel_test_list()
              $(tst_labs_tr).append(tst_book_th);
               
              $(tst_table_head).append(tst_labs_tr);
-            
+            var tst_table_body = document.createElement('tbody');
              for (i=0;i<data.length;i++) 
              {
              	var tst_lab_details_tr = document.createElement('tr');
@@ -818,8 +820,9 @@ function sel_test_list()
               	 $(tst_lab_details_tr).append(tst_price_td);
               	 $(tst_lab_details_tr).append(tst_discount_td);
               	 $(tst_lab_details_tr).append(tst_book_td);
-              	 $(tst_table_head).append(tst_lab_details_tr);
+              	 $(tst_table_body).append(tst_lab_details_tr);
               	 $(tst_labs_table).append(tst_table_head);
+              	 $(tst_labs_table).append(tst_table_body);
               	 $(tst_lab_details_tr).on('click',function () 
               	 {
                     var tst_sel_labname =$(this).data('tst-labname');
@@ -840,9 +843,9 @@ function sel_test_list()
              } //for loop        
     $(tst_labs_tr).on('click',function () 
     {
-         console.log("1"); 
+        
          $("#myTable").tablesorter( {sortList: [[0,1], [1,0],[2,0]]} ); 
-         console.log("2");
+        
      });//row on click
               
              
@@ -902,7 +905,7 @@ function sel_test_list()
                $(local_tst_off_lab_list_modal).append(local_tst_off_lab_head_name);
                var local_tst_labs_table = document.createElement('table');
               $(local_tst_labs_table).addClass("tablesorter");
-              $(local_tst_labs_table).attr("id","test_Table");
+              $(local_tst_labs_table).attr("id","myTable");
               $(local_tst_labs_table).css('marginRight','20px');
               $(local_tst_labs_table).css('cursor','pointer');
               $(local_tst_labs_table).css('marginTop','12px');
@@ -1019,15 +1022,9 @@ function sel_test_list()
              $(local_tst_labs_tr).append(local_tst_labprice_th);
              $(local_tst_labs_tr).append(local_tst_labdiscount_th);
              $(local_tst_labs_tr).append(local_tst_book_th);
-              $(local_tst_labs_tr).on('click',function () 
-             {
-             	   
-                	$("#test_table").tablesorter({sortList: [[0,1], [1,0],[4,0]]}); 
-                	console.log("c");
-                	
-            });
+             
              $(local_tst_table_head).append(local_tst_labs_tr);
-            
+            var local_tst_table_body = document.createElement('tbody');
              for (i=0;i<tst_localdata.length;i++) 
              {
              	var local_tst_lab_details_tr = document.createElement('tr');
@@ -1100,7 +1097,9 @@ function sel_test_list()
               	 $(local_tst_lab_details_tr).append(local_tst_price_td);
               	 $(local_tst_lab_details_tr).append(local_tst_discount_td);
               	 $(local_tst_lab_details_tr).append(local_tst_book_td);
-              	 $(local_tst_table_head).append(local_tst_lab_details_tr);
+              	 $(local_tst_table_body).append(local_tst_lab_details_tr);
+              	 $(local_tst_labs_table).append(local_tst_table_head);
+                $(local_tst_labs_table).append(local_tst_table_body);
               	 $(local_tst_lab_details_tr).on('click',function () 
               	 {
                     var tst_sel_labname =$(this).data('tst-labname');
@@ -1119,8 +1118,11 @@ function sel_test_list()
               	 	});//click
 
              } //for loop        
-               
-              $(local_tst_labs_table).append(local_tst_table_head);
+                $(local_tst_labs_tr).on('click',function () 
+             {
+                	 $("#myTable").tablesorter( {sortList: [[0,1], [1,0],[2,0]]} );
+                });
+              
               $(local_tst_off_lab_list_modal).append(local_tst_labs_table);
                var local_tst_back_btn = document.createElement('button');
                  $(local_tst_back_btn).html("Back");
@@ -1130,7 +1132,6 @@ function sel_test_list()
                  $(local_tst_back_btn).css('color','white');
                  $(local_tst_back_btn).css('width','60px');
                  $(local_tst_back_btn).css('borderRadius','6px');
-                 //$(pkg_back_btn).css('paddingLeft','6px');
                  $(local_tst_back_btn).css('border','0px');
                  $(local_tst_back_btn).css('fontWeight','bold');
                  $(local_tst_off_lab_list_modal).append(local_tst_back_btn);
@@ -2209,6 +2210,15 @@ function tst_form_handler(tst_sel_onlinereport,tst_sel_type,tst_sel_labslug,tst_
                   	    local_tst_totalcount++;
                   	  }//else
                     }//for slug length 
+                    if (tst_local_slug.length%2 !=0) 
+                    {
+                    	   var local_empty_tst = document.createElement('div');
+                  	    $(local_empty_tst).addClass("test_name");
+                  	    $(local_empty_tst).html("-");
+                  	    $(tst_right_element).append(local_empty_tst);
+                  	    $(tst_left_element).css('float','left');
+                  	    $(tst_left_element).css('width','248px');
+                    }//if length
                   $(tst_preview_sel_tst_head).append(tst_left_element);
                   $(tst_preview_sel_tst_head).append(tst_right_element);
                   $(tst_preview_box).append(tst_preview_sel_tst_head);
