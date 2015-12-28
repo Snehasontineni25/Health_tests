@@ -208,3 +208,18 @@ li
     font-size: 15px;
     padding-left: 5px;
 }
+@media (min-width: 768px) {
+#header_test_input {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+#header_test_input {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+#header_test_input {
+    width: 1170px;
+  }
+}
