@@ -93,15 +93,24 @@ li
 {
  background:rgba(236,246,248,0.99) !important;
 }
-.test_name:nth-child(2n)
+#prvw_test_name:nth-child(2n)
 {
   background:rgba(236,246,248,0.99) !important;
 }
-.test_name
+#prvw_test_name
 {
   border: 1px solid #ddd !important;
+  padding-left: 6px !important;
 }
-  .datetimepicker 
+#prvw_test_right_name
+{
+   border-left: 1px solid #ddd !important;
+}
+#prvw_test_left_name
+{
+   border-right:1px solid #ddd !important;
+}
+.datetimepicker 
 {
   left:666px !important;
   top:320px !important; 
@@ -212,6 +221,19 @@ li
 .cross_img
 {
   width:276px !important;
+}
+.preview_test_head
+{
+  padding-top: 3px !important;
+  height: 20px !important;
+}
+#tst_left_list
+{
+  padding: 0px !important;
+}
+#tst_right_list
+{
+  padding: 0px !important;
 }
 @media (min-width: 768px) {
 #header_test_input {

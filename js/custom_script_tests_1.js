@@ -189,37 +189,24 @@ function tests_list_handler()
       $(tst_prjct_list_cont).addClass("projct-list-cont");
       var tst_prjct_ul = document.createElement('ul');
       $(tst_prjct_ul).addClass("list-group");
-      var tst_prjct_li_alltests= document.createElement('li');
-      var tst_prjct_a_alltests = document.createElement('a');
-      $(tst_prjct_a_alltests).addClass("test-active-color");
-      $(tst_prjct_a_alltests).attr('href','/health-tests');
-      $(tst_prjct_a_alltests).html("All Tests");
-      $(tst_prjct_li_alltests).append(tst_prjct_a_alltests);
-      var tst_prjct_li_allergytests = document.createElement('li');
-      var tst_prjct_a_allergytest = document.createElement('a');
-      $(tst_prjct_a_allergytest).attr('href','health-tests/AllergyTests');
-      $(tst_prjct_a_allergytest).addClass("");
-      $(tst_prjct_a_allergytest).html("Allergy Tests");
-      $(tst_prjct_li_allergytests).append(tst_prjct_a_allergytest);
-      var tst_prjct_li_cardiactests = document.createElement('li');
-      var tst_prjct_a_cardiactests = document.createElement('a');
-      $(tst_prjct_a_cardiactests).attr('href','health-tests/CardiacTests');
-      $(tst_prjct_a_cardiactests).addClass("");
-      $(tst_prjct_a_cardiactests).html("Cardiac Tests");
-      $(tst_prjct_li_cardiactests).append(tst_prjct_a_cardiactests);
-      var tst_prjct_li_diabetictests = document.createElement('li');
-      var tst_prjct_a_diabetictests = document.createElement('a');
-      $(tst_prjct_a_diabetictests).attr('href','health-tests/DiabeticTests');
-      $(tst_prjct_a_diabetictests).addClass("");
-      $(tst_prjct_a_diabetictests).html("Diabetic Tests");
-      $(tst_prjct_li_diabetictests).append(tst_prjct_a_diabetictests);
-      $(tst_prjct_ul).append(tst_prjct_li_alltests);
-      $(tst_prjct_ul).append(tst_prjct_li_allergytests);
-      $(tst_prjct_ul).append(tst_prjct_li_cardiactests);
-      $(tst_prjct_ul).append(tst_prjct_li_diabetictests);
       $(tst_prjct_list_cont).append(tst_prjct_ul);
       $(tst_prjct_col).append(tst_prjct_list_cont);
       $(tst_list_row).append(tst_prjct_col);
+      for (var catgry_tst =0;catgry_tst<data.categoryList.length;catgry_tst++) 
+      {
+      	var curnt_catgry_slug = data.currentCategorySlug;
+      	var tst_prjct_li_alltests= document.createElement('li');
+         var tst_prjct_a_alltests = document.createElement('a');
+         $(tst_prjct_a_alltests).attr('id',data.categoryList[catgry_tst].categorySlug);
+         $(tst_prjct_a_alltests).attr('href',data.categoryList[catgry_tst].categoryName);        
+         $(tst_prjct_a_alltests).html(data.categoryList[catgry_tst].categoryName);
+         $(tst_prjct_li_alltests).append(tst_prjct_a_alltests);
+         $(tst_prjct_ul).append(tst_prjct_li_alltests);
+          if (curnt_catgry_slug.localeCompare(data.categoryList[catgry_tst].categorySlug) == 0)
+          {
+          	 $(tst_prjct_a_alltests).addClass("test-active-color");
+          }// if catgry slug 
+       }//for loop
       var tst_test_list_col =  document.createElement('div');
       $(tst_test_list_col).addClass("col-md-9");
       var tests_list = document.createElement('div');
@@ -255,7 +242,7 @@ function tests_list_handler()
          $(tst_det).append(tst_name_p);
          $(tst_name_col).append(tst_det);
          $(tests_list).append(tst_name_col);  
-        }  //for    	     
+       }  //for    	     
    }//success
   });//ajax
 }//fnct hndlr
@@ -264,7 +251,8 @@ window.onload = tests_list_handler();
 function test_search_handler(tst_search_name,tst_title) 
 {
 	var tst_search_val = $("#tst_search").val();
-   var tst_val_exp = new RegExp(tst_search_val);
+	var tst_val_lowercase = tst_search_val.toLowerCase();
+   var tst_val_exp = new RegExp(tst_val_lowercase);
  	var tst_id = tst_search_name.id;
  	var tst_id_lowercase = tst_id.toLowerCase();
  	var tst_id_lnth = tst_id.length;
@@ -272,8 +260,8 @@ function test_search_handler(tst_search_name,tst_title)
  	if (tst_val_exp.test(tst_id_lowercase)) 
    {
       $(tst_search_name).css('display','block');
-      var tst_lnth = tst_search_val.length;
-      var tst_index = tst_id_lowercase.indexOf(tst_search_val);
+      var tst_lnth = tst_val_lowercase.length;
+      var tst_index = tst_id_lowercase.indexOf(tst_val_lowercase);
       var tst_str = tst_id.substr(tst_index,tst_lnth);
       var left_tst = tst_id.substr(0,tst_index);
       var tst_substr_lnth = tst_index+tst_lnth;
@@ -290,7 +278,7 @@ function test_search_handler(tst_search_name,tst_title)
       $(tst_str_name).css('lineHeight','1');
       $(tst_str_name).css('marginTop','3px');
       var tst_right_name =document.createElement('div');
-      $(tst_right_name).css('float','left');
+      //$(tst_right_name).css('float','left');
       var tst_text_ip = tst_search_val ;
       var tst_text_ip_lnth = tst_search_val.length; 
       var tst_empty_space = tst_search_val.charAt(tst_text_ip_lnth -1);
@@ -321,51 +309,7 @@ function test_search_handler(tst_search_name,tst_title)
    } //else
 }//fnct hndlr
 
-function  test_not_sel_hndlr() 
-{
-   var  tst_labtest_alert = document.createElement('div');
-   $(tst_labtest_alert).addClass("modal");
-   $(tst_labtest_alert).attr('id', 'labtest_modal');
-   $(tst_labtest_alert).css('position','relative');
-   $(tst_labtest_alert).css('backgroundColor','#fff'); 
-   $(tst_labtest_alert).css('position','relative');
-   $(tst_labtest_alert).css('border','0px');
-   $(tst_labtest_alert).css('borderRadius','5px');
-   $(tst_labtest_alert).css('paddingRight','0px');
-   $(tst_labtest_alert).modal().open(); 
-   var tst_close_action  = document.createElement('a');
-   $(tst_close_action).addClass("close");
-   $(tst_close_action).attr('href','#');
-   $(tst_close_action).html("&times;");
-   $(tst_close_action).css('marginTop' ,'-21px');
-   $(tst_close_action).css('fontSize','30px');
-   $(tst_close_action).css('marginRight','7px');
-   var modal_labclose_body = document.createElement('div');
-   $(modal_labclose_body).html('Minimum  one test must be selected');
-   $(modal_labclose_body).css('padding' ,'10px');
-   $(modal_labclose_body).css('position','relative');
-   var modal_labtest_footer = document.createElement('div');
-   $(modal_labtest_footer).css('textAlign','right');
-   $(modal_labtest_footer).css('padding','15px');
-   $(modal_labtest_footer).css('borderTop','1px solid #e5e5e5');
-   $(modal_labtest_footer).css('marginRight','20px');
-   var labtest_btnelement = document.createElement('button');
-   $(labtest_btnelement).addClass("btn btn-primary");
-   $(labtest_btnelement).html("Ok");
-   $(tst_close_action).on('click',function () 
-   {
-      $(tst_labtest_alert).modal().close(); 
-   });
-   $(labtest_btnelement).on('click',function () 
-   {
-       $(tst_labtest_alert).modal().close();
-   });
-   $(modal_labtest_footer).append(labtest_btnelement);
-   $('#labtest_modal').append(tst_close_action);
-   $('#labtest_modal').append(modal_labclose_body);
-   $('#labtest_modal').append(modal_labtest_footer);
-   return false;
-}//fnctn
+
 function remove_handler()
 {
  	  var tst_btn_id = this.id;
@@ -601,7 +545,7 @@ function sel_test_list()
                $(tst_off_lab_list_modal).css('position','relative');
                $(tst_off_lab_list_modal).css('backgroundColor','#fff');
                $(tst_off_lab_list_modal).css('paddingRight','0px');
-               $(tst_off_lab_list_modal).css('width','636px');
+               $(tst_off_lab_list_modal).css('width','740px');
                var tst_off_lab_close_element = document.createElement('a');
                $(tst_off_lab_close_element).addClass("close");
                $(tst_off_lab_close_element).attr('href','#');
@@ -628,7 +572,7 @@ function sel_test_list()
               $(tst_labs_tr).css("color","white");
               var tst_labname_th = document.createElement('th');
               $(tst_labname_th).css('border', '1px solid #ddd');
-              $(tst_labname_th).css('width','226px');
+              $(tst_labname_th).css('width','300px');
               var tst_labname_element = document.createElement('div');
               $(tst_labname_element).html("Lab Name");
               $(tst_labname_element).css('padding','10px');
@@ -647,6 +591,7 @@ function sel_test_list()
              $(tst_img_desc).css('paddingTop','13px');
              var tst_labarea_th = document.createElement('th');
               $(tst_labarea_th).css('border', '1px solid #ddd');
+              $(tst_labarea_th).css('width','140px');
               var tst_labarea = document.createElement('div');
               $(tst_labarea).html("Location");
               $(tst_labarea).css('textAlign','center');
@@ -690,6 +635,7 @@ function sel_test_list()
              $(tst_labprice_th).append(tst_labprice_imgs);
              var tst_labdiscount_th = document.createElement('th');
               $(tst_labdiscount_th).css('border', '1px solid #ddd');
+              $(tst_labdiscount_th).css('width','105px');
                var tst_labdiscount = document.createElement('div');
               $(tst_labdiscount).html("Discount");
               $(tst_labdiscount).css('float', 'left');
@@ -710,6 +656,7 @@ function sel_test_list()
               $(tst_book_th).html("Book");
               $(tst_book_th).css('textAlign','center');
               $(tst_book_th).css('padding','10px');
+              $(tst_book_th).css('width','60px');
              $(tst_discount_desc).append(tst_discount_img_desc);
              $(tst_discount_asc).append(tst_discount_img_asc);
              $(tst_labdiscount_imgs).append(tst_discount_desc);
@@ -887,7 +834,7 @@ function sel_test_list()
                $(local_tst_off_lab_list_modal).css('position','relative');
                $(local_tst_off_lab_list_modal).css('backgroundColor','#fff');
                $(local_tst_off_lab_list_modal).css('paddingRight','0px');
-               $(local_tst_off_lab_list_modal).css('width','636px');
+               $(local_tst_off_lab_list_modal).css('width','740px');
                var local_tst_off_lab_close_element = document.createElement('a');
                $(local_tst_off_lab_close_element).addClass("close");
                $(local_tst_off_lab_close_element).attr('href','#');
@@ -916,7 +863,7 @@ function sel_test_list()
               $(local_tst_labs_tr).css("color","white");
               var local_tst_labname_th = document.createElement('th');
               $(local_tst_labname_th).css('border', '1px solid #ddd');
-              $(local_tst_labname_th).css('width','226px');
+              $(local_tst_labname_th).css('width','300px');
               var local_tst_labname_element = document.createElement('div');
               $(local_tst_labname_element).html("Lab Name");
               $(local_tst_labname_element).css('padding','10px');
@@ -935,6 +882,7 @@ function sel_test_list()
              $(local_tst_img_desc).css('paddingTop','13px');
              var local_tst_labarea_th = document.createElement('th');
               $(local_tst_labarea_th).css('border', '1px solid #ddd');
+              $(local_tst_labarea_th).css('width','140px');
               var local_tst_labarea = document.createElement('div');
               $(local_tst_labarea).html("Location");
               $(local_tst_labarea).css('textAlign','center');
@@ -959,7 +907,6 @@ function sel_test_list()
               $(local_tst_labprice).css('float', 'left');
               $(local_tst_labprice).css('textAlign','center');
               $(local_tst_labprice).css('padding','10px');
-              
               var local_tst_labprice_imgs = document.createElement('div');
               $(local_tst_labprice_imgs).css('float','right');
               var local_tst_price_asc = document.createElement('div');
@@ -979,6 +926,7 @@ function sel_test_list()
              $(local_tst_labprice_th).append(local_tst_labprice_imgs);
              var local_tst_labdiscount_th = document.createElement('th');
               $(local_tst_labdiscount_th).css('border', '1px solid #ddd');
+              $(local_tst_labdiscount_th).css('width','105px');
                var local_tst_labdiscount = document.createElement('div');
               $(local_tst_labdiscount).html("Discount");
               $(local_tst_labdiscount).css('float', 'left');
@@ -999,6 +947,7 @@ function sel_test_list()
               $(local_tst_book_th).html("Book");
               $(local_tst_book_th).css('textAlign','center');
               $(local_tst_book_th).css('padding','10px');
+              $(local_tst_book_th).css('width','60px');
              $(local_tst_discount_desc).append(local_tst_discount_img_desc);
              $(local_tst_discount_asc).append(local_tst_discount_img_asc);
              $(local_tst_labdiscount_imgs).append(local_tst_discount_desc);
@@ -1263,11 +1212,8 @@ function tst_form_handler(tst_sel_onlinereport,tst_sel_type,tst_sel_labslug,tst_
                   $(tst_input_address).attr('value','');
                   $(tst_input_address).css('width','468px');
                   $(tst_input_address).css('border','1px solid #c4cdcf');
-                  //$(pkg_input_address).addClass('form-icon form-icon-lock');
                   $(tst_input_address).attr('placeholder','Please enter your Address');
                   $(tst_input_address).attr('required','required');
-                   
-                  //$(pkg_input_address).attr('maxlength','56');
                   $(tst_input_address).css('paddingRight','11px');
                   var tst_phno_row = document.createElement('div');
                   $(tst_phno_row).addClass("row");
@@ -1486,7 +1432,6 @@ function tst_form_handler(tst_sel_onlinereport,tst_sel_type,tst_sel_labslug,tst_
                      $(tst_error_display).append(tst_apptime_element);
                      $(tst_error_display).append(tst_app_time_element);
                      $(tst_error_display).append(tst_address_element);
-                      
                      $("#tst_modal_formpage").append(tst_form_close_element);
                      $("#tst_modal_formpage").append(tst_contact_heading);
                      $("#tst_modal_formpage").append(tst_lab_details);
@@ -1619,7 +1564,6 @@ function tst_form_handler(tst_sel_onlinereport,tst_sel_type,tst_sel_labslug,tst_
                       if(document.getElementById('tst_err_name').style.display = 'block')
                         {
                             document.getElementById('tst_err_name').style.display = 'none';
-                            //document.getElementById('pkg_address').style.display = 'none'
                            
                         }//if err_name
                       }//if 
@@ -1896,6 +1840,7 @@ function tst_form_handler(tst_sel_onlinereport,tst_sel_type,tst_sel_labslug,tst_
                   $(tst_preview_pkg_info).css('paddingLeft','6px');
                   $(tst_preview_pkg_info).css('marginTop','10px');
                   $(tst_preview_pkg_info).css('marginBottom','2px');
+                  $(tst_preview_pkg_info).css('height','21px');
                   var tst_table_dealname = document.createElement('table');
                   $(tst_table_dealname).css('float','left');
                   $(tst_table_dealname).css('marginBottom','15px');
@@ -2003,6 +1948,7 @@ function tst_form_handler(tst_sel_onlinereport,tst_sel_type,tst_sel_labslug,tst_
                    $(tst_price_details_price).html("Rs."+tst_sel_fp);
                    $(tst_price_details_price).css('textAlign','center');
                    $(tst_price_details_price).css('fontSize','22px');
+                   $(tst_price_details_price).css('color','rgb(236,73,73)');
                   var tst_price_details_mrp = document.createElement('div');
                   $(tst_price_details_mrp).css('fontSize','18px');
                   var tst_mrp_bracket_div = document.createElement('div');
@@ -2013,7 +1959,6 @@ function tst_form_handler(tst_sel_onlinereport,tst_sel_type,tst_sel_labslug,tst_
                   var tst_mrp_price = document.createElement('div');
                   $(tst_mrp_price).html("Rs."+"&nbsp"+tst_sel_mrp);
                   $(tst_mrp_price).css('textDecoration','line-through');
-                  $(tst_mrp_price).css('color','rgb(236,73,73)');
                   $(tst_mrp_price).css('float','left');
                   var tst_mrp_closebracket = document.createElement('div');
                   $(tst_mrp_closebracket).html("&nbsp"+")");
@@ -2035,6 +1980,7 @@ function tst_form_handler(tst_sel_onlinereport,tst_sel_type,tst_sel_labslug,tst_
                   var tst_patient_table_head_tr = document.createElement('tr');
                   $(tst_patient_table_head_tr).css('background','rgb(65, 167, 179)');
                   $(tst_patient_table_head_tr).css('border','1px solid rgb(65, 167, 179)');
+                  $(tst_patient_table_head_tr).css('height','21px');
                   var tst_patient_table_head_td =document.createElement('td');
                   $(tst_patient_table_head_td).html("&nbsp"+"&nbsp"+"Patient Information");
                   $(tst_patient_table_head_td).css('color','white');
@@ -2045,50 +1991,55 @@ function tst_form_handler(tst_sel_onlinereport,tst_sel_type,tst_sel_labslug,tst_
                   $(tst_patient_table_head_td_2).css('color','rgb(65, 167, 179)');
                   $(tst_patient_table_head_tr).append(tst_patient_table_head_td_2);
                   var tst_tr_patient = document.createElement('tr');
-                   $(tst_tr_patient).css('lineHeight','2');
                    $(tst_tr_patient).addClass("tst_preview_info");
                    $(tst_tr_patient).css('border' ,'1px solid rgb(221, 221, 221)');
                   var tst_td_patientname = document.createElement('td');
                   $(tst_td_patientname).html("&nbsp"+"&nbsp"+"&nbsp"+"&nbsp"+"&nbsp"+"&nbsp"+"Name");
                   $(tst_td_patientname).css('border','1px solid #ddd');
+                  $(tst_td_patientname).css('width','265px');
                   var tst_td_patient_name = document.createElement('td');
                   $(tst_td_patient_name).html("&nbsp"+localStorage.getItem("patient_name"));
+                  $(tst_td_patient_name).css('width','265px');
                   var tst_tr_email = document.createElement('tr');
                   $(tst_tr_email).addClass("tst_preview_info");
-                  $(tst_tr_email).css('lineHeight','2');
                   $(tst_tr_email).css('border' ,'1px solid rgb(221, 221, 221)');
                   var tst_td_emailheading = document.createElement('td');
                   $(tst_td_emailheading).html("&nbsp"+"&nbsp"+"&nbsp"+"&nbsp"+"&nbsp"+"&nbsp"+"Email");
                   $(tst_td_emailheading).css('border','1px solid #ddd');
+                  $(tst_td_email_heading).css('width','265px');
                   var tst_td_email_heading = document.createElement('td');
                   $(tst_td_email_heading).html("&nbsp"+localStorage.getItem("patient_email"));
+                  $(tst_td_email_heading).css('width','265px');
                   var tst_tr_phno = document.createElement('tr');
-                  $(tst_tr_phno).css('lineHeight','2');
                   $(tst_tr_phno).addClass("tst_preview_info");
                   $(tst_tr_phno).css('border' ,'1px solid rgb(221, 221, 221)');
                   var tst_td_phnoheading = document.createElement('td');
                   $(tst_td_phnoheading).html("&nbsp"+"&nbsp"+"&nbsp"+"&nbsp"+"&nbsp"+"&nbsp"+"Mobile No");
                   $(tst_td_phnoheading).css('border','1px solid #ddd');
+                  $(tst_td_phnoheading).css('width','265px');
                   var tst_td_phno_heading = document.createElement('td');
                   $(tst_td_phno_heading).html("&nbsp"+localStorage.getItem("patient_phone"));
+                  $(tst_td_phno_heading).css('width','265px');
                   var tst_tr_apptime = document.createElement('tr');
-                  $(tst_tr_apptime).css('lineHeight','2');
                   $(tst_tr_apptime).addClass("tst_preview_info");
                   $(tst_tr_apptime).css('border' ,'1px solid rgb(221, 221, 221)');
                   var tst_td_apptimeheading = document.createElement('td');
                   $(tst_td_apptimeheading).html("&nbsp"+"&nbsp"+"&nbsp"+"&nbsp"+"&nbsp"+"&nbsp"+"Appointment Timing");
                   $(tst_td_apptimeheading).css('border','1px solid #ddd');
+                  $(tst_td_apptimeheading).css('width','265px');
                   var tst_td_apptime_heading = document.createElement('td');
                   $(tst_td_apptime_heading).html("&nbsp"+localStorage.getItem("patient_app_time"));
+                  $(tst_td_apptime_heading).css('width','265px');
                   var tst_tr_address = document.createElement('tr');
-                  $(tst_tr_address).css('lineHeight','2');
                   $(tst_tr_address).addClass("tst_preview_info");
                   $(tst_tr_address).css('border' ,'1px solid rgb(221, 221, 221)');
                   var tst_td_address_heading = document.createElement('td');
                   $(tst_td_address_heading).html("&nbsp"+"&nbsp"+"&nbsp"+"&nbsp"+"&nbsp"+"&nbsp"+"Address");
                   $(tst_td_address_heading).css('border','1px solid rgb(221, 221, 221)');
+                  $(tst_td_address_heading).css('width','265px');
                   var tst_td_address = document.createElement('td');
                   $(tst_td_address).html("&nbsp"+localStorage.getItem("patient_address"));
+                  $(tst_td_address).css('width','265px');
                   $(tst_tr_address).append(tst_td_address_heading);
                   $(tst_tr_address).append(tst_td_address);
                   var tst_back_button = document.createElement('button');
@@ -2169,58 +2120,38 @@ function tst_form_handler(tst_sel_onlinereport,tst_sel_type,tst_sel_labslug,tst_
                   $(tst_preview_box).append(tst_price_details);
                   $(tst_preview_box).append(tst_patient_details_table);
                   var tst_preview_sel_tst_head = document.createElement('div');
+                  $(tst_preview_sel_tst_head).addClass("row");
                   var tst_preview_sel_tst_head_element = document.createElement('h5');
+                  $(tst_preview_sel_tst_head_element).addClass("preview_test_head");
                   $(tst_preview_sel_tst_head_element).html("&nbsp;"+"&nbsp;"+"&nbsp;"+"&nbsp;"+"Tests");
                   $(tst_preview_sel_tst_head_element).css('background','rgb(65, 167, 179)');
                   $(tst_preview_sel_tst_head_element).css('color','white');
                   $(tst_preview_sel_tst_head_element).css('fontWeight','bold');
                   $(tst_preview_sel_tst_head).append(tst_preview_sel_tst_head_element);
-                  var tst_left_element = document.createElement('div');
-                  $(tst_left_element).addClass("tst_left_list");
-                  var tst_right_element = document.createElement('div');
-                  $(tst_right_element).addClass("tst_right_list");
                   var tst_local_slug = JSON.parse(localStorage.getItem("slugarray"));
-                  if ((tst_local_slug%2) =="0") 
+                  var index=0;
+                  while (index<tst_local_slug.length)
                   {
-             	    var local_tst_totalcount = 1; 
-                  }//if even
-                  if ((tst_local_slug%2) !="0")
-                  {
-                    var local_tst_totalcount = 0;
-                  }//if odd
-                  
-                    for (var i=0;i<tst_local_slug.length;i++) 
-                    {
-                  	  if (i%2 !=0)  
-                  	  {
-                  	    var local_tst_name = document.createElement('div');
-                  	    $(local_tst_name).addClass("test_name");
-                  	    $(local_tst_name).html("&nbsp"+"&nbsp"+tst_local_slug[i][1]);
-                  	    $(tst_right_element).append(local_tst_name);
-                  	    $(tst_left_element).css('float','left');
-                  	    $(tst_left_element).css('width','248px');
-                  	    local_tst_totalcount++;
-                  	  }//if lnth not zero
-                  	  else 
-                  	  {
-                  	  	  var local_tst_name = document.createElement('div');
-                  	    $(local_tst_name).addClass("test_name");
-                  	    $(local_tst_name).html("&nbsp"+"&nbsp"+tst_local_slug[i][1]);
-                  	    $(tst_left_element).append(local_tst_name);
-                  	    local_tst_totalcount++;
-                  	  }//else
-                    }//for slug length 
-                    if (tst_local_slug.length%2 !=0) 
-                    {
-                    	   var local_empty_tst = document.createElement('div');
-                  	    $(local_empty_tst).addClass("test_name");
-                  	    $(local_empty_tst).html("-");
-                  	    $(tst_right_element).append(local_empty_tst);
-                  	    $(tst_left_element).css('float','left');
-                  	    $(tst_left_element).css('width','248px');
-                    }//if length
-                  $(tst_preview_sel_tst_head).append(tst_left_element);
-                  $(tst_preview_sel_tst_head).append(tst_right_element);
+                     var tst_row = document.createElement('div');
+                     $(tst_row).addClass("row");
+                     $(tst_row).attr('id','prvw_test_name');
+                     var tst_left_row = document.createElement('div');
+                     $(tst_left_row).addClass("col-md-6");
+                     $(tst_left_row).attr('id','prvw_test_left_name')
+                     $(tst_left_row).html(tst_local_slug[index][1]);
+                     $(tst_row).append(tst_left_row);
+                     index++;
+                     if (index<tst_local_slug.length) 
+                     {
+                     	var tst_right_row = document.createElement('div');
+                     	$(tst_right_row).addClass("col-md-6");
+                     	$(tst_right_row).attr('id','prvw_test_right_name');
+                     	$(tst_right_row).html(tst_local_slug[index][1]);
+                     	$(tst_row).append(tst_right_row);
+                     }//if
+                     index++;
+                     $(tst_preview_sel_tst_head).append(tst_row);
+                   }//while loop
                   $(tst_preview_box).append(tst_preview_sel_tst_head);
                   $(tst_preview_box).append(tst_tmm_form_element);
                   $(".close").on('click',function () 
@@ -2452,6 +2383,18 @@ var tst_final_slug = JSON.parse(localStorage.getItem("final_slugarray"));
           	}//if error
           	else
           	 {
+          	 	  var tst_local_slug_array = JSON.parse(localStorage.getItem("slugarray"));
+     	           for (var i=0;i<tst_local_slug_array.length;i++) 
+     	           {
+     	             	 var tst_input_checked = document.getElementById(tst_local_slug_array[i][0]+"_input");
+     	             	 $(tst_input_checked).attr('checked',false);
+     	             }//for local strg arry
+     	             var empty_slug_array = [];
+     	             var empty_tst_final_slug = [];
+          	 	    slug_array =empty_slug_array;
+                   tst_final_slug = empty_tst_final_slug;
+                  localStorage.setItem("slugarray",JSON.stringify(slug_array));
+                  localStorage.setItem("slugarray",JSON.stringify(tst_final_slug));
                   var tst_confirm_page = document.createElement('div');
                   $(tst_confirm_page).addClass("modal");
                   $(tst_confirm_page).attr('id','tst_modal_fourthpage');
