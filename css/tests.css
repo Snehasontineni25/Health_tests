@@ -235,6 +235,25 @@ li
 {
   padding: 0px !important;
 }
+.list_test:hover
+{
+  background:rgb(65, 167, 179) !important;
+  color: white;
+}
+#sel_test_list
+{
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+.success_det
+{
+  padding-top: 3px !important;
+  padding-bottom: 3px !important;
+}
+#display_seltest_btn
+{
+  padding-right: 0px !important;
+}
 @media (min-width: 768px) {
 #header_test_input {
     width: 750px;

@@ -37,17 +37,20 @@ function tst_length_hanlder(test_input)
   	slug_array = JSON.parse(localStorage.getItem("slugarray"));
    var test_length = slug_array.length;
    if (test_length != 0) 
-   {
+   {display_click_msg
+   	var tst_dsply_msg = document.getElementById("display_click_msg");
+   	$(tst_dsply_msg).css('display','none');
       var tst_book_btn = document.getElementsByClassName("book_btn")[0];
       $(tst_book_btn).css('display','block');
       var sel_tst_count = document.getElementById("tst_length");
       $(sel_tst_count).css('display','block');
       $(sel_tst_count).html("No of tests selected"+":"+"&nbsp;"+"&nbsp;"+"&nbsp;"+test_length+"&nbsp;"+"&nbsp;"+"&nbsp;"+"&nbsp;");
-      var tst_book_btn = document.getElementsByClassName("book_btn")[0];
    }//if tst lnth
    else 
    {
       $(test_input).parent().parent().css('background','white');
+      var tst_dsply_msg = document.getElementById("display_click_msg");
+   	$(tst_dsply_msg).css('display','block');
       var tst_book_btn = document.getElementsByClassName("book_btn")[0];
       $(tst_book_btn).css('display','none');
       var sel_tst_count = document.getElementById("tst_length");
@@ -75,7 +78,6 @@ function tests_list_handler()
    data:{categorySlug:tst_categories},
    success:function(data)
    {
-      localStorage.removeItem("selarray");
       var tst_loading = document.getElementById("tst_loader");
       $(tst_loading).css('display','none');
 	   var cust_container = document.getElementsByClassName("cust-container")[0];
@@ -87,14 +89,26 @@ function tests_list_handler()
       $(tst_heading_row).css('background','white');
       var tst_list_col = document.createElement('div');
       $(tst_list_col).addClass("col-md-3");
+      $(tst_list_col).css('paddingTop','6px');
       var tst_head_element = document.createElement('h2');
       $(tst_head_element).html("Health Tests");
       $(tst_head_element).css('color', 'rgb(65, 167, 179)');
       $(tst_head_element).css('fontWeight','bold');
       $(tst_head_element).css('fontSize','18px');
       $(tst_list_col).append(tst_head_element);
+      var tst_load_msg_book = document.createElement('div');
+      $(tst_load_msg_book).addClass("col-md-5");
+      var tst_load_msg = document.createElement('div');
+      //$(tst_load_msg).addClass("col-md-2");
+      $(tst_load_msg).attr('id','display_click_msg');
+      $(tst_load_msg).html("Click check box to book");
+      $(tst_load_msg).css('fontWeight','bold');
+      $(tst_load_msg).css('display','block');
+      $(tst_load_msg).css('paddingTop','6px');
       var tst_sel_head_row = document.createElement('div');
-      $(tst_sel_head_row).addClass("col-md-5");
+      //$(tst_sel_head_row).addClass("col-md-3");
+      $(tst_sel_head_row).attr('id','display_seltest_btn');
+      $(tst_sel_head_row).css('paddingTop','6px');
       var tst_sel_length = document.createElement('div');
       $(tst_sel_length).attr('id',"tst_length");
       $(tst_sel_length).css('float','left');
@@ -102,12 +116,12 @@ function tests_list_handler()
       $(tst_sel_length).css('display','none');
       var tst_book_button = document.createElement('button');
       $(tst_book_button).addClass("book_btn");
+      $(tst_book_button).html("Book Now");
       $(tst_book_button).css('background','#ec4949');
       $(tst_book_button).css('color','white');
       $(tst_book_button).css('border','0px');
       $(tst_book_button).css('fontWeight','bold');
       $(tst_book_button).css('borderRadius','3px');
-      $(tst_book_button).html("Book Now");
       $(tst_book_button).css('paddingLeft','6px');
       $(tst_book_button).css('paddingRight','6px');
       $(tst_book_button).css('display','none');
@@ -176,7 +190,10 @@ function tests_list_handler()
       $(tst_sel_head_row).append(tst_sel_length);
       $(tst_sel_head_row).append(tst_book_button); 
       $(tst_heading_row).append(tst_list_col);
-      $(tst_heading_row).append(tst_sel_head_row);
+      $(tst_heading_row).append(tst_load_msg);
+      $(tst_load_msg_book).append(tst_load_msg);
+      $(tst_load_msg_book).append(tst_sel_head_row);
+      $(tst_heading_row).append(tst_load_msg_book);
       $(tst_heading_row).append(tst_search_col);
       $(cust_container).append(tst_heading_row);
       var tst_list_row = document.createElement('div');
@@ -336,11 +353,17 @@ function remove_handler()
      {
      	  $(tst_num_element).html('');
      	  var tst_rem_book_btn = document.getElementsByClassName("book_btn")[0];
-        $(tst_rem_book_btn).html('');
+        $(tst_rem_book_btn).css('display','none');
+        var tst_dsply_msg = document.getElementById("display_click_msg");
+   	  $(tst_dsply_msg).css('display','block');
         $("#modal_test_firstpage").modal().close();
      }//if tst lnth
      else
      {
+     	  var tst_rem_book_btn = document.getElementsByClassName("book_btn")[0];
+        $(tst_rem_book_btn).css('display','block');
+        var tst_dsply_msg = document.getElementById("display_click_msg");
+   	  $(tst_dsply_msg).css('display','none');
        $(tst_num_element).html("No of tests selected"+":"+"&nbsp;"+"&nbsp;"+"&nbsp;"+tst.length+"&nbsp;"+"&nbsp;"+"&nbsp;"+"&nbsp;");
      }//else tst lnth
  }//fnctn chkng handler
@@ -376,8 +399,9 @@ function sel_test_list()
      $(tst_list_heading).css('fontWeight','bold');
      $(tst_list_heading).css('marginRight','20px');
      $(tst_list_heading).css('marginTop','20px');
+     $(tst_list_heading).css('paddingTop','2px');
+     $(tst_list_heading).css('paddingBottom','2px');
      $(tst_sel_test_list_modal).append(tst_list_heading);
-     var tst_list_table = document.createElement('table');
      for (i=0;i<tst_local_data.length;i++) 
      {
         var tst_list_btn = document.createElement('div');
@@ -490,6 +514,7 @@ function sel_test_list()
     data:{testSlugs:tst_slug_str},
     success:function(data)
     {    	
+       console.log(data);
        var tst_dataToStore = JSON.stringify(data);
        localStorage.setItem('tst_labdata',tst_dataToStore);
        if (data.length == "0") 
@@ -2430,32 +2455,40 @@ var tst_final_slug = JSON.parse(localStorage.getItem("final_slugarray"));
                   $(tst_labname_tr).addClass("tst_order_class");
                   $(tst_labname_tr).attr('id','tst_ordered_lab');
                   var tst_labname_td= document.createElement('td');
-                  $(tst_labname_td).html("Lab name");
+                  $(tst_labname_td).addClass("success_det");
+                  $(tst_labname_td).html("&nbsp"+"&nbsp"+"&nbsp"+"&nbsp"+"Lab name");
                   $(tst_labname_td).css('borderRight','1px solid #ddd');
                   var tst_lab_name_td = document.createElement('td');
-                  $(tst_lab_name_td).html("&nbsp"+data.labName);
+                  $(tst_lab_name_td).addClass("success_det");
+                  $(tst_lab_name_td).html("&nbsp"+"&nbsp"+"&nbsp"+data.labName);
                   var tst_orderid_tr = document.createElement('tr');
                   $(tst_orderid_tr).addClass("tst_order_class");
                   var tst_orderid_td = document.createElement('td');
-                  $(tst_orderid_td).html("OrderId");
+                  $(tst_orderid_td).addClass("success_det");
+                  $(tst_orderid_td).html("&nbsp"+"&nbsp"+"&nbsp"+"&nbsp"+"OrderId");
                   $(tst_orderid_td).css('borderRight','1px solid #ddd');
                   var tst_order_id_td = document.createElement('td');
-                  $(tst_order_id_td).html("&nbsp"+data.orderId);
+                  $(tst_order_id_td).addClass("success_det");
+                  $(tst_order_id_td).html("&nbsp"+"&nbsp"+"&nbsp"+data.orderId);
                   var tst_ptnt_name_tr = document.createElement('tr');
                   $(tst_ptnt_name_tr).addClass("tst_order_class");
                   $(tst_ptnt_name_tr).attr('id','order_name');
                   var tst_ptnt_name_td = document.createElement('td');
-                  $(tst_ptnt_name_td).html("Name");
+                  $(tst_ptnt_name_td).addClass("success_det");
+                  $(tst_ptnt_name_td).html("&nbsp"+"&nbsp"+"&nbsp"+"&nbsp"+"Name");
                   $(tst_ptnt_name_td).css('borderRight','1px solid #ddd');
                   var tst_ptntname_td = document.createElement('td');
-                  $(tst_ptntname_td).html("&nbsp"+data.patientName);
+                  $(tst_ptntname_td).addClass("success_det");
+                  $(tst_ptntname_td).html("&nbsp"+"&nbsp"+"&nbsp"+data.patientName);
                   var tst_apptime_tr = document.createElement('tr');
                   $(tst_apptime_tr).addClass("tst_order_class");
                   var tst_apptime_td = document.createElement('td');
-                  $(tst_apptime_td).html("Appointment Timing");
+                  $(tst_apptime_td).addClass("success_det");
+                  $(tst_apptime_td).html("&nbsp"+"&nbsp"+"&nbsp"+"&nbsp"+"Appointment Timing");
                   $(tst_apptime_td).css('borderRight','1px solid #ddd');
                   var tst_appt_time_td = document.createElement('td');
-                  $(tst_appt_time_td).html("&nbsp"+data.apptTime);
+                  $(tst_appt_time_td).addClass("success_det");
+                  $(tst_appt_time_td).html("&nbsp"+"&nbsp"+"&nbsp"+data.apptTime);
                   var tst_close_button = document.createElement('button');
                   $(tst_close_button).addClass("tst_close_modal");
                   $(tst_close_button).attr('type','button');
