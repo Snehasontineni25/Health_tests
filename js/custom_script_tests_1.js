@@ -514,7 +514,6 @@ function sel_test_list()
     data:{testSlugs:tst_slug_str},
     success:function(data)
     {    	
-       console.log(data);
        var tst_dataToStore = JSON.stringify(data);
        localStorage.setItem('tst_labdata',tst_dataToStore);
        if (data.length == "0") 
