@@ -208,12 +208,17 @@ li
     list-style: none;
     text-align: left;
     margin-top: 5px;
+    cursor:pointer;
+}
+#projct-list-cont ul li:hover
+{
+   background:rgba(236,246,248,0.99) !important;
 }
 #projct-list-cont ul li a {
     color: #333;
     display: block;
     font-weight: 600;
-    padding: 13px;
+    padding: 6px;
     padding-right: 0px;
     font-size: 15px;
     padding-left: 5px;

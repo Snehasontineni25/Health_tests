@@ -81,15 +81,6 @@ function tests_list_handler()
    	console.log(data);
       var tst_loading = document.getElementById("tst_loader");
       $(tst_loading).css('display','none');
-      var tst_frst_sctn_container = document.getElementsByClassName("container cont-12")[0];
-      $(tst_frst_sctn_container).css('position','fixed');
-      $(tst_frst_sctn_container).css('zIndex','99');
-      $(tst_frst_sctn_container).css('background','white');
-      $(tst_frst_sctn_container).css('borderBottom','1px solid #ebebeb');
-      var tst_second_sctn = document.getElementsByClassName("test-cat-section")[0];
-      $(tst_second_sctn).css('paddingTop','76px');
-      var tst_first_sctn = document.getElementsByClassName("inner-header section-one")[0];
-      $(tst_first_sctn).css('borderBottom','0px');
 	   var cust_container = document.getElementsByClassName("cust-container")[0];
 	   var tst_heading_row = document.createElement('div');
       $(tst_heading_row).addClass("row m-z");
@@ -98,6 +89,7 @@ function tests_list_handler()
       $(tst_heading_row).css('zIndex','99');
       $(tst_heading_row).css('background','white');
       $(tst_heading_row).css('paddingTop','10px');
+      $(tst_heading_row).css('paddingBottom','17px');
       var tst_list_col = document.createElement('div');
       $(tst_list_col).addClass("col-md-3");
       $(tst_list_col).css('paddingTop','6px');
@@ -226,6 +218,7 @@ function tests_list_handler()
       $(tst_list_row).append(tst_prjct_col);
       for (var catgry_tst =0;catgry_tst<data.categoryList.length;catgry_tst++) 
       {
+      	
       	var curnt_catgry_slug = data.currentCategorySlug;
       	var tst_prjct_li_alltests= document.createElement('li');
          var tst_prjct_a_alltests = document.createElement('a');
@@ -239,10 +232,12 @@ function tests_list_handler()
           	 $(tst_prjct_a_alltests).addClass("test-active-color");
           }// if catgry slug 
        }//for loop
+       
       var tst_test_list_col =  document.createElement('div');
       $(tst_test_list_col).addClass("col-md-9");
       $(tst_test_list_col).css('float','right');
       $(tst_test_list_col).css('paddingLeft','54px');
+      $(tst_test_list_col).css('paddingTop','9px');
       var tests_list = document.createElement('div');
       $(tests_list).addClass("row");
       $(tests_list).attr('id','tests_listbox');

@@ -102,9 +102,7 @@
 </section>
 
   <section style="margin-top:50px;" class="section-four">
-  <div class="row">
-  <div class="col-md-12">
-	<div class="bottom-menu-holder">
+	<div class="col-md-12 bottom-menu-holder ">
     	<div class="company-menu">
         	<ul>
             	<li><a href="health-tests">Health Tests</a></li>
@@ -122,13 +120,9 @@
           </ul>
         </div>
     </div>
-  </div>
-  </div>
 </section>
 <section>
- <div class="row">
- <div class="col-md-12">
-  <div class="footer">
+ <div class="col-md-12 footer">
     <div class="container cont-12">
         <div class="copy-right">
                     <h4 style="padding:20px;">Copyright © 2015 Segistics Systems. All rights reserved </h4>
@@ -143,9 +137,18 @@
         </div>
     </div>
   </div>
- </div>
- </div>
 </section>
+<script type="text/javascript">
+ var tst_frst_sctn_container = document.getElementsByClassName("container cont-12")[0];
+ tst_frst_sctn_container.style.position = 'fixed';
+ tst_frst_sctn_container.style.zIndex = '99';
+ tst_frst_sctn_container.style.background = 'white';
+ tst_frst_sctn_container.style.borderBottom = '1px solid #ebebeb';
+ var tst_second_sctn = document.getElementsByClassName("test-cat-section")[0];
+ tst_second_sctn.style.paddingTop = '76px';
+ var tst_first_sctn = document.getElementsByClassName("inner-header section-one")[0];
+ tst_first_sctn.style.borderBottom = '0px';
+ </script>
 <script type="text/javascript">
 var a=['js/jquery.min.js',
         'js/bootstrap.min.js',
