@@ -206,10 +206,10 @@ function tests_list_handler()
       $(tst_list_row).css('background','#fff');
       $(tst_list_row).css('paddingTop','46px');
       var tst_prjct_col = document.createElement('div');
-      $(tst_prjct_col).addClass("col-md-3 pad0");
+      $(tst_prjct_col).addClass("cust-container");
       $(tst_prjct_col).css('position','fixed');
       var tst_prjct_list_cont = document.createElement('div');
-      $(tst_prjct_list_cont).addClass("row");
+      $(tst_prjct_list_cont).addClass("col-md-3 pad0");
       $(tst_prjct_list_cont).attr('id','projct-list-cont');
       var tst_prjct_ul = document.createElement('ul');
       $(tst_prjct_ul).addClass("list-group");
@@ -236,7 +236,7 @@ function tests_list_handler()
       var tst_test_list_col =  document.createElement('div');
       $(tst_test_list_col).addClass("col-md-9");
       $(tst_test_list_col).css('float','right');
-      $(tst_test_list_col).css('paddingLeft','54px');
+      //$(tst_test_list_col).css('paddingLeft','54px');
       $(tst_test_list_col).css('paddingTop','9px');
       var tests_list = document.createElement('div');
       $(tests_list).addClass("row");
