@@ -1969,7 +1969,7 @@ function tst_form_handler(tst_sel_onlinereport,tst_sel_type,tst_sel_labslug,tst_
                        $(tst_homevisit_one_element).css('color','rgb(236,73,73)');
                      $(tst_homevisit_one_element).css('textAlign','left');
                      
-                    $(tst_homevisit_one_element).css('fontSize','10px');
+           	         $(tst_homevisit_one_element).css('fontSize','10px');
                     
                     $(tst_homevisit_one_element).css('display','block');
                     var tst_star_homevisit_one = document.createElement('span');
@@ -2011,6 +2011,7 @@ function tst_form_handler(tst_sel_onlinereport,tst_sel_type,tst_sel_labslug,tst_
                   $(tst_price_details).css('float','right');
                   $(tst_price_details).css('paddingTop','6px');
                   $(tst_price_details).css('paddingRight','12px');
+                  $(tst_price_details).css('marginBottom','11px');
                   var tst_price_details_price = document.createElement('div');
                    $(tst_price_details_price).html("Rs."+tst_sel_fp);
                    $(tst_price_details_price).css('textAlign','center');
