@@ -4,6 +4,9 @@ localStorage.removeItem("slugarray");
 localStorage.removeItem("final_slugarray");
 var slug_array = [];
 var tst_final_slug = [];
+var slug_temp_array = [];
+var tst_slug_arr = [];
+var tst_final_slug_arry; 
 localStorage.setItem("slugarray",JSON.stringify(slug_array));
 function changecheckbox(event) 
 {
@@ -17,7 +20,6 @@ function changecheckbox(event)
    {
       var remove_test_value = $(this).val();
       var remove_test_slug = $(this).data('testslug');
-      var slug_temp_array = [];
       for (slug_tst=0;slug_tst<slug_array.length;slug_tst++) 
       {
          if (remove_test_slug.localeCompare(slug_array[slug_tst][0])) 
@@ -69,6 +71,24 @@ function book_btn_handler()
    } //if tst count
 }//book fnctn
 
+function test_view_mouseover_handler()
+{
+       var tst_local_view_btn = JSON.parse(localStorage.getItem("tst_view_btn_slug_array"));
+       var tst_btn_parent_id =(this).id; 
+       for (var i=0;i<tst_local_view_btn.testsList.length;i++) 
+       {
+       	var tst_btn_parent_id =(this).id;
+       	var tst_btn_parent_id_href = (this).id+"_href";
+       	var tst_btn_parent_anchor_element = document.getElementById(tst_local_view_btn.testsList[i].testSlug+"_href");
+       	var tst_id =tst_btn_parent_anchor_element.id; 
+       	var tst_exp = new RegExp(tst_btn_parent_id_href);
+       	if (tst_btn_parent_id_href.localeCompare(tst_id))
+         {
+         	  console.log("zero");
+              $(tst_btn_parent_anchor_element).css('display','block');      
+         }//if compare
+       }//for loop endng       
+}//mouse ovr fnctn endng
 function tests_list_handler()
 {
 	$.ajax({
@@ -217,14 +237,14 @@ function tests_list_handler()
       $(tst_prjct_list_cont).append(tst_prjct_ul);
       $(tst_prjct_col).append(tst_prjct_list_cont);
       $(tst_list_row).append(tst_prjct_col);
+      
       for (var catgry_tst =0;catgry_tst<data.categoryList.length;catgry_tst++) 
       {
-      	
       	var curnt_catgry_slug = data.currentCategorySlug;
       	var tst_prjct_li_alltests= document.createElement('li');
          var tst_prjct_a_alltests = document.createElement('a');
-         $(tst_prjct_a_alltests).attr('id',data.categoryList[catgry_tst].categorySlug);
-         $(tst_prjct_a_alltests).attr('href',data.categoryList[catgry_tst].categoryName);        
+         $(tst_prjct_a_alltests).attr('id',data.categoryList[catgry_tst].categorySlug);  
+         $(tst_prjct_a_alltests).attr('href',data.categoryList[catgry_tst].categoryPageURL);     
          $(tst_prjct_a_alltests).html(data.categoryList[catgry_tst].categoryName);
          $(tst_prjct_li_alltests).append(tst_prjct_a_alltests);
          $(tst_prjct_ul).append(tst_prjct_li_alltests);
@@ -237,7 +257,6 @@ function tests_list_handler()
       var tst_test_list_col =  document.createElement('div');
       $(tst_test_list_col).addClass("col-md-9");
       $(tst_test_list_col).css('float','right');
-      //$(tst_test_list_col).css('paddingLeft','54px');
       $(tst_test_list_col).css('paddingTop','9px');
       var tests_list = document.createElement('div');
       $(tests_list).addClass("row");
@@ -250,8 +269,12 @@ function tests_list_handler()
          var tst_name_col = document.createElement('div');
          $(tst_name_col).addClass("col-md-4");
          $(tst_name_col).attr('id',data.testsList[i].testName);
+         $(tst_name_col).css('height','45px');
          var tst_det = document.createElement('div');
          $(tst_det).addClass("test_details");
+         $(tst_det).attr('id',data.testsList[i].testSlug+"_test_det");
+         $(tst_det).on('mouseover',test_view_mouseover_handler);
+         //$(tst_det).on('mouseover',test_view_mouseout_handler);
          var tst_chk_box = document.createElement('div');
          $(tst_chk_box).addClass("check_box");
          var tst_chkbox_input = document.createElement('input');
@@ -263,17 +286,40 @@ function tests_list_handler()
          $(tst_chkbox_input).attr('data-testslug',data.testsList[i].testSlug);
          $(tst_chkbox_input).on('click',changecheckbox);
          $(tst_chk_box).append(tst_chkbox_input);
+         $(tst_det).append(tst_chk_box);
+         var tst_p_view = document.createElement('div');
+         $(tst_p_view).css('height','25px');
          var tst_name_p = document.createElement('p');
          $(tst_name_p).html(data.testsList[i].testName);
          $(tst_name_p).attr('title',data.testsList[i].testName);
          $(tst_name_p).attr('id',data.testsList[i].testSlug+"_par");
          $(tst_name_p).css('maxHeight','25px');
          $(tst_name_p).css('overflow','hidden');
-         $(tst_det).append(tst_chk_box);
-         $(tst_det).append(tst_name_p);
+         $(tst_p_view).append(tst_name_p);
+         var hst = window.location.hostname;
+         var tst_view_btn = document.createElement('a');
+         $(tst_view_btn).html("View");
+         $(tst_view_btn).addClass("view_btn_hide");
+         $(tst_view_btn).attr('href',data.testsList[i].testProfilePageURL);
+         $(tst_view_btn).attr('id',data.testsList[i].testSlug+"_href");
+         $(tst_view_btn).attr('target','_blank');
+         $(tst_view_btn).css('position','relative');
+         $(tst_view_btn).css('bottom','18px');
+         $(tst_view_btn).css('float','right');
+         $(tst_view_btn).css('background','rgb(236, 73, 73)');
+         $(tst_view_btn).css('color','white');
+         $(tst_view_btn).css('fontSize','10px');
+         $(tst_view_btn).css('paddingLeft','6px');
+         $(tst_view_btn).css('paddingRight','6px');
+         $(tst_view_btn).css('fontWeight','bold');
+         $(tst_view_btn).css('cursor','pointer');
+         $(tst_view_btn).css('display','none');
+         $(tst_p_view).append(tst_view_btn);
+          $(tst_det).append(tst_p_view);
          $(tst_name_col).append(tst_det);
+         //$(tst_det).on('mouseover',test_view_mouseover_handler);
          $(tests_list).append(tst_name_col);  
-       }  //for    	     
+       }  //for     
    }//success
   });//ajax
 }//fnct hndlr
@@ -512,7 +558,6 @@ function sel_test_list()
  function tests_off_labs_list_handler()
  {
     var local_tst_slug = JSON.parse(localStorage.getItem("slugarray"));
-    var tst_slug_arr = [];
     localStorage.setItem("final_slugarray",JSON.stringify(tst_final_slug));
     for (i=0;i<local_tst_slug.length;i++) 
     {
@@ -531,6 +576,7 @@ function sel_test_list()
     {    	
        var tst_dataToStore = JSON.stringify(data);
        localStorage.setItem('tst_labdata',tst_dataToStore);
+       console.log(localStorage.setItem('tst_labdata',tst_dataToStore));
        if (data.length == "0") 
        {
            var tst_labcount_alert = document.createElement('div');
@@ -551,7 +597,7 @@ function sel_test_list()
            $(close_action).css('fontSize','30px');
            $(close_action).css('marginRight','7px');
            var modal_labcount_body = document.createElement('div');
-           $(modal_labcount_body).html('The tests you  selected are not in one lab');
+           $(modal_labcount_body).html('Please remove or reset the tests');
            $(modal_labcount_body).css('padding' ,'10px');
            $(modal_labcount_body).css('position','relative');
            var modal_labcount_footer = document.createElement('div');
@@ -565,10 +611,12 @@ function sel_test_list()
            $(close_action).on('click',function () 
            {
               $(tst_labcount_alert).modal().close(); 
+              sel_test_list();
            });
            $(labcount_btnelement).on('click',function () 
            {
               $(tst_labcount_alert).modal().close();
+              sel_test_list();
            });
            $(modal_labcount_footer).append(labcount_btnelement);
            $('#labcount_modal').append(close_action);
@@ -584,7 +632,7 @@ function sel_test_list()
                $(tst_off_lab_list_modal).css('position','relative');
                $(tst_off_lab_list_modal).css('backgroundColor','#fff');
                $(tst_off_lab_list_modal).css('paddingRight','0px');
-               $(tst_off_lab_list_modal).css('width','740px');
+               $(tst_off_lab_list_modal).css('width','750px');
                var tst_off_lab_close_element = document.createElement('a');
                $(tst_off_lab_close_element).addClass("close");
                $(tst_off_lab_close_element).attr('href','#');
@@ -649,7 +697,7 @@ function sel_test_list()
              $(tst_area_img_desc).css('paddingTop','13px');
              var tst_labprice_th = document.createElement('th');
               $(tst_labprice_th).css('border', '1px solid #ddd');
-              $(tst_labprice_th).css('width','90px');
+              $(tst_labprice_th).css('width','100px');
               var tst_labprice = document.createElement('div');
               $(tst_labprice).html("Price");
               $(tst_labprice).css('float', 'left');
@@ -833,8 +881,8 @@ function sel_test_list()
              } //for loop        
     $(tst_labs_tr).on('click',function () 
     {
-        
-         $("#myTable").tablesorter( {sortList: [[0,1], [1,0],[2,0]]} ); 
+           $("#myTable").tablesorter();
+         //$("#myTable").tablesorter( {sortList: [[0,0], [1,0],[2,0],[3,0]]} ); 
         
      });//row on click
                var tst_back_btn = document.createElement('button');
@@ -869,6 +917,7 @@ function sel_test_list()
  function local_off_labs_list()
  {
             var tst_localdata = JSON.parse(localStorage.getItem('tst_labdata')); 
+            console.log(JSON.parse(localStorage.getItem('tst_labdata')));
              var local_tst_off_lab_list_modal = document.createElement('div');
                $(local_tst_off_lab_list_modal).addClass("modal");
                $(local_tst_off_lab_list_modal).attr('id', 'modal_test_labpage');
@@ -2365,13 +2414,13 @@ function tst_form_handler(tst_sel_onlinereport,tst_sel_type,tst_sel_labslug,tst_
                    
                   }// if 09
                   (tst_sel_labslug,tst_sel_labname,tst_sel_labarea,tst_sel_fp,tst_sel_mrp,tst_sel_discount,tst_sel_labaddress,tst_sel_labpin)
-var tst_final_slug = JSON.parse(localStorage.getItem("final_slugarray"));
+    tst_final_slug_arry = JSON.parse(localStorage.getItem("final_slugarray"));
                        
          $.ajax({
          url:tst_host_api+"/m-checkout/book-order",
          type:'POST',
          dataType:'json',
-         data:{labSlug:tst_sel_labslug,testSlugs:tst_final_slug,patientName:tst_pnt_name,patientMobile:tst_pnt_mobileno,patientEmail:tst_mail,apptTime:tst_sel_time},
+         data:{labSlug:tst_sel_labslug,testSlugs:tst_final_slug_arry,patientName:tst_pnt_name,patientMobile:tst_pnt_mobileno,patientEmail:tst_mail,apptTime:tst_sel_time},
           success:function(data)
           {
           	
