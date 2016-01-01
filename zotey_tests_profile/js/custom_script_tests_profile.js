@@ -294,7 +294,8 @@ function test_profile_details_handler()
 	   $(tst_profile_popular_head).css('fontSize','16px');
 	   $(tst_profile_popular_head).css('color','rgb(65, 167, 179)');
 	   $(tst_profile_popular_head).css('fontWeight','bold');
-	   $(tst_profile_popular_head).css('marginBottom','6px');
+	   $(tst_profile_popular_head).css('marginBottom','13px');
+	   $(tst_profile_popular_head).css('textAlign','center');
 	   $(tst_profile_img_col).append(tst_profile_popular_head);
 	   for (var i=0;i<data.popular_tests.length;i++) 
 	   {
@@ -314,7 +315,8 @@ function test_profile_details_handler()
 	      $(tst_profile_related_head).css('fontSize','16px');
 	      $(tst_profile_related_head).css('color','rgb(65, 167, 179)');
 	      $(tst_profile_related_head).css('fontWeight','bold');
-	      $(tst_profile_related_head).css('marginBottom','6px');
+	      $(tst_profile_related_head).css('marginBottom','13px');
+	      $(tst_profile_related_head).css('textAlign','center');
 	      $(tst_profile_img_col).append(tst_profile_related_head);
 	     for (var i=0;i<data.relatedTests.length;i++) 
 	     {
