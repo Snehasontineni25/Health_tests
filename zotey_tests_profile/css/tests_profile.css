@@ -18,3 +18,29 @@ li
   margin: 0px auto;
   padding: 5px;
 }
+#tst_profile_details:nth-child(2n) 
+{
+    background: rgba(236,246,248,0.99) !important;
+}
+ #tst_profile_details:hover
+{
+    background:rgb(65, 167, 179) !important;
+    color: white;
+}
+ #cloud_tests
+ {
+     padding-top: 35px;
+     text-align: justify;
+ }
+ .pop_test:nth-child(even)
+ {
+      color:green; 
+ }
+ .pop_test:nth-child(odd)
+ {
+      color:red; 
+ }
+ .pop_test:hover
+ {
+   background:yellow; 
+ }
