@@ -742,7 +742,6 @@ function sel_test_list()
              $(tst_labs_tr).append(tst_labprice_th);
              $(tst_labs_tr).append(tst_labdiscount_th);
              $(tst_labs_tr).append(tst_book_th);
-              
              $(tst_table_head).append(tst_labs_tr);
             var tst_table_body = document.createElement('tbody');
              for (i=0;i<data.length;i++) 
@@ -2395,28 +2394,9 @@ function tst_form_handler(tst_sel_onlinereport,tst_sel_type,tst_sel_labslug,tst_
          data:{labSlug:tst_sel_labslug,testSlugs:tst_final_slug,patientName:tst_pnt_name,patientMobile:tst_pnt_mobileno,patientEmail:tst_mail,apptTime:tst_sel_time},
           success:function(data)
           {
+          	
           	 if(data.error)
           	{
-          		  var tst_error_local_slug_array = slug_array;
-     	           for (var i=0;i<tst_error_local_slug_array.length;i++) 
-     	           {
-     	             	 var tst_error_input_checked = document.getElementById(tst_error_local_slug_array[i][0]+"_input");
-     	             	 $(tst_error_input_checked).attr('checked',false);
-     	             	 var tst_error_input_parent_color = document.getElementById(tst_error_local_slug_array[i][0]+"_test_det");
-     	             	 $(tst_error_input_parent_color).css('background','white');
-     	             }//for local strg arry
-     	               slug_array = [];
-                   	tst_final_slug = [];
-                 	   var test_error_close_length = slug_array.length;
-                 	   if (test_length == 0) 
-                     {               
-   	                 var tst_error_close_dsply_msg = document.getElementById("display_click_msg");
-   	                 $(tst_error_close_dsply_msg).css('display','block');
-                       var sel_error_close_tst_count = document.getElementById("tst_length");
-                       $(sel_error_close_tst_count).css('display','none');
-                       var tst_error_close_book_btn = document.getElementsByClassName("book_btn")[0];
-                       $(tst_error_close_book_btn).css('display','none');
-                     }//if error close btn tst lnth
           	     var tst_error_page = document.createElement('div');
                   $(tst_error_page).addClass("modal");
                   $(tst_error_page).attr('id','test_modal_errorpage');
@@ -2459,12 +2439,11 @@ function tst_form_handler(tst_sel_onlinereport,tst_sel_type,tst_sel_labslug,tst_
                    $(tst_error_closing).on('click',function () 
                    {
                    	$(tst_error_page).modal().close();
-                 	});// srror click close
+                   	});
                    $(tst_error_close).on('click',function () 
                    {
                    	$(tst_error_page).modal().close();
-                  });//tst error close fnctn
-
+                   	});
           	}//if error
           	else
           	 {
@@ -2473,21 +2452,7 @@ function tst_form_handler(tst_sel_onlinereport,tst_sel_type,tst_sel_labslug,tst_
      	           {
      	             	 var tst_input_checked = document.getElementById(tst_local_slug_array[i][0]+"_input");
      	             	 $(tst_input_checked).attr('checked',false);
-     	             	 var tst_input_parent_color = document.getElementById(tst_local_slug_array[i][0]+"_test_det");
-     	             	 $(tst_input_parent_color).css('background','white');
      	             }//for local strg arry
-     	               slug_array = [];
-                 	   tst_final_slug = [];
-                 	   var test_length = slug_array.length;
-                 	   if (test_length == 0) 
-                    {               
-   	                 var tst_dsply_msg = document.getElementById("display_click_msg");
-   	                 $(tst_dsply_msg).css('display','block');
-                       var sel_tst_count = document.getElementById("tst_length");
-                       $(sel_tst_count).css('display','none');
-                       var tst_book_btn = document.getElementsByClassName("book_btn")[0];
-                       $(tst_book_btn).css('display','none');
-                    }//if close btn tst lnth
                   var tst_confirm_page = document.createElement('div');
                   $(tst_confirm_page).addClass("modal");
                   $(tst_confirm_page).attr('id','tst_modal_fourthpage');
@@ -2587,9 +2552,10 @@ function tst_form_handler(tst_sel_onlinereport,tst_sel_type,tst_sel_labslug,tst_
                   $(tst_order_element).append(tst_close_button);
                   $("#tst_modal_fourthpage").append(tst_confirm_closing);
                   $("#tst_modal_fourthpage").append(tst_order_element);
+                 
                    $(".tst_confirm_close").on('click',function () 
                  {
-                 	  $(tst_confirm_page).modal().close(); 
+               	  $(tst_confirm_page).modal().close(); 
                  });//click
                   $(".tst_close_modal").on('click',function () 
                   {

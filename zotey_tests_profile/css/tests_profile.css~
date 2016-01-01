@@ -1,0 +1,20 @@
+html
+{
+  padding:0px !important;
+}
+li
+{
+ margin-bottom: 0px !important;
+}
+ #tst_profile_loader
+{
+ margin-left: 38%;
+ width: 11%;
+ margin-top: 6%;
+}
+.cust_profile_wrapper
+{
+  width: 100%;
+  margin: 0px auto;
+  padding: 5px;
+}
