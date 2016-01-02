@@ -24,8 +24,8 @@ li
 }
  #tst_profile_details:hover
 {
-    background:rgb(65, 167, 179) !important;
-    color: white;
+    /*background:rgb(65, 167, 179) !important;
+    color: white; */
 }
  #cloud_tests
  {
@@ -44,3 +44,48 @@ li
  {
    background:yellow; 
  }
+ .profile_lab_page:hover
+ {
+   /*background:rgb(65, 167, 179) !important;*/
+    background:rgb(234, 73, 79);
+    color: white !important; 
+ }
+ .profile_lab_page
+ {
+   text-decoration: none !important; 
+ }
+ .pop_test
+ {
+   text-decoration: none !important; 
+ }
+ #tmm-form-wizard .button span 
+{
+    border-top: 1px solid #C74242 !important;
+    border-bottom: 1px solid #C03535 !important;
+    border-left: 1px solid #EC4949 !important;
+    border-right: 1px solid #C24040 !important;
+    display: inline-block;
+ }
+ #tmm-form-wizard .prev .button-divider 
+ {
+    position: absolute;
+    height: 50% !important;
+    width: 2px;
+    border: 1px solid #EC4949 !important;
+ }
+  #tmm-form-wizard .next .button-divider
+  {
+     position: absolute;
+    height: 50% !important;
+    width: 2px;
+    border: 1px solid #EC4949 !important;
+  }
+   
+   .form-wizard
+   {
+     background: white !important;   
+   }
+   #tmm-form-wizard .button
+   {
+    background-image: linear-gradient(to bottom, #EC4949 25%, #C04040 100%) !important;   
+   }

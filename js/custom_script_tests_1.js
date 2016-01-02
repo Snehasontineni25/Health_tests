@@ -1276,7 +1276,6 @@ function tst_form_handler(tst_sel_onlinereport,tst_sel_type,tst_sel_labslug,tst_
                   $(tst_input_address).attr('id','tst_address');
                   $(tst_input_address).attr('name','patient_address');
                   $(tst_input_address).attr('value','');
-                  $(tst_input_address).css('width','468px');
                   $(tst_input_address).css('border','1px solid #c4cdcf');
                   $(tst_input_address).attr('placeholder','Please enter your Address');
                   $(tst_input_address).attr('required','required');
@@ -1869,7 +1868,7 @@ function tst_form_handler(tst_sel_onlinereport,tst_sel_type,tst_sel_labslug,tst_
     }//fnctn handler
      
         
-     function tst_preview_handler(tst_sel_onlinereport,tst_sel_type,tst_sel_labslug,tst_sel_labname,tst_sel_labarea,tst_sel_fp,tst_sel_mrp,tst_sel_discount,tst_sel_labaddress,tst_sel_labpin)
+ function tst_preview_handler(tst_sel_onlinereport,tst_sel_type,tst_sel_labslug,tst_sel_labname,tst_sel_labarea,tst_sel_fp,tst_sel_mrp,tst_sel_discount,tst_sel_labaddress,tst_sel_labpin)
      {
      	            var tst_ptnt_address = localStorage.getItem("patient_address");
      	            var tst_order_page = document.createElement('div');
