@@ -89,3 +89,21 @@ li
    {
     background-image: linear-gradient(to bottom, #EC4949 25%, #C04040 100%) !important;   
    }
+.tst_pfl_preview_info:nth-child(2n)
+{ 
+   background: rgba(236,246,248,0.99) !important;
+}
+.tst_pfl_success_det
+{
+  padding-top: 3px !important;
+  padding-bottom: 3px !important;
+}
+.tst_pfl_order_class:nth-child(2n)
+{
+  background:rgba(236,246,248,0.99) !important;
+ }
+  .tst_pfl_order_class
+ {
+  border:1px solid #ddd !important;
+}
+

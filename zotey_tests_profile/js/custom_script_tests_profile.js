@@ -1,6 +1,7 @@
 var tst_profile_slug ="random-blood-sugar";
 var tst_profile_host = "http://beta.zotey.com/m-api";
 var tst_profile_tstname;
+var tst_profile_tstslug;
 function test_profile_details_handler()
 {
 	$.ajax({
@@ -10,8 +11,8 @@ function test_profile_details_handler()
    data:{testSlug:tst_profile_slug},
    success:function(data)
    {
-   	console.log(data);
    	tst_profile_tstname = data.testInfo.testName;
+   	tst_profile_tstslug = data.testInfo.testSlug;
       var tst_profile_loading = document.getElementById("tst_profile_loader");
       $(tst_profile_loading).css('display','none');
       var cust_profile_container = document.getElementsByClassName("cust-container")[0];
@@ -359,7 +360,7 @@ function tst_profile_details_hander()
 	var tst_pfl_labaddress_pin = $(this).data('tst-profile-labpin');
 	var tst_pfl_online_rpt = $(this).data('tst-profile-onlineReports');
 	var tst_pfl_vst_type = $(this).data('tst-profile-labvisit');
-  console.log(tst_pfl_labname,tst_pfl_labslug,tst_pfl_discount,tst_pfl_mrp,tst_pfl_dp,tst_pfl_labarea,tst_pfl_labaddress,tst_pfl_labaddress_pin);
+  
   tst_profile_form_handler(tst_pfl_online_rpt,tst_pfl_vst_type,tst_pfl_labname,tst_pfl_labslug,tst_pfl_discount,tst_pfl_mrp,tst_pfl_dp,tst_pfl_labarea,tst_pfl_labaddress,tst_pfl_labaddress_pin);
 }
 
@@ -1027,7 +1028,7 @@ function tst_profile_form_handler(tst_pfl_online_rpt,tst_pfl_vst_type,tst_pfl_la
      var tst_pfl_ptnt_address = localStorage.getItem("patient_address");
      var tst_pfl_order_page = document.createElement('div');
      $(tst_pfl_order_page).addClass("modal");
-     $(tst_pfl_order_page).attr('id','tst_modal_thirdpage');
+     $(tst_pfl_order_page).attr('id','tst_pfl_preview_modal');
      $(tst_pfl_order_page).css('backgroundColor','#fff');
      $(tst_pfl_order_page).css('position','relative');
      $(tst_pfl_order_page).css('paddingRight','0px');
@@ -1188,9 +1189,28 @@ function tst_profile_form_handler(tst_pfl_online_rpt,tst_pfl_vst_type,tst_pfl_la
              $(tst_pfl_price_details_mrp).append(tst_pfl_discount_det);
              $(tst_pfl_price_details).append(tst_pfl_price_details_price);
              $(tst_pfl_price_details).append(tst_pfl_price_details_mrp);
+             var tst_pfl_testinfo_head_table = document.createElement('table');
+             $(tst_pfl_testinfo_head_table).css('width','531px');
+             $(tst_pfl_testinfo_head_table).css('marginBottom','16px');
+             var tst_pfl_testinfo_head_tr = document.createElement('tr');
+             $(tst_pfl_testinfo_head_tr).css('border','1px solid rgb(65, 167, 179)');
+             var tst_pfl_testinfo_head = document.createElement('th');
+             $(tst_pfl_testinfo_head).html("Test Information");
+             $(tst_pfl_testinfo_head).css('background','rgb(65, 167, 179)');
+             $(tst_pfl_testinfo_head).css('color','white');
+             $(tst_pfl_testinfo_head).css('fontWeight','bold');
+             $(tst_pfl_testinfo_head_tr).append(tst_pfl_testinfo_head);
+             var tst_pfl_testname_tr = document.createElement('tr');
+             $(tst_pfl_testname_tr).css('border','1px solid rgb(221, 221, 221)');
+             var tst_pfl_testname  = document.createElement('td');
+             $(tst_pfl_testname).html(tst_profile_tstname);
+             $(tst_pfl_testname).css('background', 'rgba(236,246,248,0.99)');
+             $(tst_pfl_testname_tr).append(tst_pfl_testname);
+             $(tst_pfl_testinfo_head_table).append(tst_pfl_testinfo_head_tr);
+             $(tst_pfl_testinfo_head_table).append(tst_pfl_testname_tr);
              var tst_pfl_patient_details_table = document.createElement('table');
              $(tst_pfl_patient_details_table).css('marginBottom','30px');
-             $(tst_pfl_patient_details_table).css('width','532px');
+             $(tst_pfl_patient_details_table).css('width','531px');
              $(tst_pfl_patient_details_table).addClass("tst_ptnt_details");
              var tst_pfl_patient_table_head_tr = document.createElement('tr');
              $(tst_pfl_patient_table_head_tr).css('background','rgb(65, 167, 179)');
@@ -1206,7 +1226,7 @@ function tst_profile_form_handler(tst_pfl_online_rpt,tst_pfl_vst_type,tst_pfl_la
              $(tst_pfl_patient_table_head_td_2).css('color','rgb(65, 167, 179)');
              $(tst_pfl_patient_table_head_tr).append(tst_pfl_patient_table_head_td_2);
              var tst_pfl_tr_patient = document.createElement('tr');
-             $(tst_pfl_tr_patient).addClass("tst_preview_info");
+             $(tst_pfl_tr_patient).addClass("tst_pfl_preview_info");
              $(tst_pfl_tr_patient).css('border' ,'1px solid rgb(221, 221, 221)');
              var tst_pfl_td_patientname = document.createElement('td');
              $(tst_pfl_td_patientname).html("&nbsp"+"&nbsp"+"&nbsp"+"&nbsp"+"&nbsp"+"&nbsp"+"Name");
@@ -1216,7 +1236,7 @@ function tst_profile_form_handler(tst_pfl_online_rpt,tst_pfl_vst_type,tst_pfl_la
              $(tst_pfl_td_patient_name).html("&nbsp"+localStorage.getItem("patient_name"));
              $(tst_pfl_td_patient_name).css('width','265px');
              var tst_pfl_tr_email = document.createElement('tr');
-             $(tst_pfl_tr_email).addClass("tst_preview_info");
+             $(tst_pfl_tr_email).addClass("tst_pfl_preview_info");
              $(tst_pfl_tr_email).css('border' ,'1px solid rgb(221, 221, 221)');
              var tst_pfl_td_emailheading = document.createElement('td');
              $(tst_pfl_td_emailheading).html("&nbsp"+"&nbsp"+"&nbsp"+"&nbsp"+"&nbsp"+"&nbsp"+"Email");
@@ -1226,7 +1246,7 @@ function tst_profile_form_handler(tst_pfl_online_rpt,tst_pfl_vst_type,tst_pfl_la
              $(tst_pfl_td_email_heading).html("&nbsp"+localStorage.getItem("patient_email"));
              $(tst_pfl_td_email_heading).css('width','265px');
              var tst_pfl_tr_phno = document.createElement('tr');
-             $(tst_pfl_tr_phno).addClass("tst_preview_info");
+             $(tst_pfl_tr_phno).addClass("tst_pfl_preview_info");
              $(tst_pfl_tr_phno).css('border' ,'1px solid rgb(221, 221, 221)');
              var tst_pfl_td_phnoheading = document.createElement('td');
              $(tst_pfl_td_phnoheading).html("&nbsp"+"&nbsp"+"&nbsp"+"&nbsp"+"&nbsp"+"&nbsp"+"Mobile No");
@@ -1236,7 +1256,7 @@ function tst_profile_form_handler(tst_pfl_online_rpt,tst_pfl_vst_type,tst_pfl_la
              $(tst_pfl_td_phno_heading).html("&nbsp"+localStorage.getItem("patient_phone"));
              $(tst_pfl_td_phno_heading).css('width','265px');
              var tst_pfl_tr_apptime = document.createElement('tr');
-             $(tst_pfl_tr_apptime).addClass("tst_preview_info");
+             $(tst_pfl_tr_apptime).addClass("tst_pfl_preview_info");
              $(tst_pfl_tr_apptime).css('border' ,'1px solid rgb(221, 221, 221)');
              var tst_pfl_td_apptimeheading = document.createElement('td');
              $(tst_pfl_td_apptimeheading).html("&nbsp"+"&nbsp"+"&nbsp"+"&nbsp"+"&nbsp"+"&nbsp"+"Appointment Timing");
@@ -1246,7 +1266,7 @@ function tst_profile_form_handler(tst_pfl_online_rpt,tst_pfl_vst_type,tst_pfl_la
              $(tst_pfl_td_apptime_heading).html("&nbsp"+localStorage.getItem("patient_app_time"));
              $(tst_pfl_td_apptime_heading).css('width','265px');
              var tst_pfl_tr_address = document.createElement('tr');
-             $(tst_pfl_tr_address).addClass("tst_preview_info");
+             $(tst_pfl_tr_address).addClass("tst_pfl_preview_info");
              $(tst_pfl_tr_address).css('border' ,'1px solid rgb(221, 221, 221)');
              var tst_pfl_td_address_heading = document.createElement('td');
              $(tst_pfl_td_address_heading).html("&nbsp"+"&nbsp"+"&nbsp"+"&nbsp"+"&nbsp"+"&nbsp"+"Address");
@@ -1325,14 +1345,337 @@ function tst_profile_form_handler(tst_pfl_online_rpt,tst_pfl_vst_type,tst_pfl_la
              $(tst_pfl_patient_details_table).append(tst_pfl_tr_apptime);
              $(tst_pfl_tmm_form_element).append(tst_pfl_prevbtn_element);
              $(tst_pfl_tmm_form_element).append(tst_pfl_orderbtn_element);
-             $("#tst_modal_thirdpage").append(tst_pfl_closing_element);
+             $("#tst_pfl_preview_modal").append(tst_pfl_closing_element);
              $(tst_pfl_preview_box).append(tst_pfl_preview_heading);
              $(tst_pfl_preview_box).append(tst_pfl_preview_pkg_info);
              $(tst_pfl_preview_box).append(tst_pfl_table_dealname); 
              $(tst_pfl_preview_box).append(tst_pfl_price_details);
+             $(tst_pfl_preview_box).append(tst_pfl_testinfo_head_table);
              $(tst_pfl_preview_box).append(tst_pfl_patient_details_table);
              $(tst_pfl_preview_box).append(tst_pfl_tmm_form_element);
-             $("#tst_modal_thirdpage").append(tst_pfl_preview_box); 
-             //$(tst_pfl_order_page).append(tst_pfl_preview_box);
+             $("#tst_pfl_preview_modal").append(tst_pfl_preview_box);
+             $(".close").on('click',function () 
+             {
+                $(tst_pfl_order_page).modal().close();
+             });//click
+             $(tst_pfl_prevbtn_element).on('click',function () 
+             { 
+              tst_profile_form_handler(tst_pfl_online_rpt,tst_pfl_vst_type,tst_pfl_labname,tst_pfl_labslug,tst_pfl_discount,tst_pfl_mrp,tst_pfl_dp,tst_pfl_labarea,tst_pfl_labaddress,tst_pfl_labaddress_pin);
+             });
+              $(tst_pfl_orderbtn_element).on('click',function ()
+              {
+                   tst_pfle_booking_handler(tst_pfl_online_rpt,tst_pfl_vst_type,tst_pfl_labname,tst_pfl_labslug,tst_pfl_discount,tst_pfl_mrp,tst_pfl_dp,tst_pfl_labarea,tst_pfl_labaddress,tst_pfl_labaddress_pin);           
+              });
  }//prvw fnctn endnf
-  
+ 
+function tst_pfle_booking_handler(tst_pfl_online_rpt,tst_pfl_vst_type,tst_pfl_labname,tst_pfl_labslug,tst_pfl_discount,tst_pfl_mrp,tst_pfl_dp,tst_pfl_labarea,tst_pfl_labaddress,tst_pfl_labaddress_pin)
+{
+    var tst_pfl_book_pnt_name =localStorage.getItem("patient_name");
+    var tst_pfl_book_pnt_mobileno = localStorage.getItem("patient_phone");
+    var tst_pfl_book_pnt_mail = localStorage.getItem("patient_email");
+    var tst_pfl_book_pnt_appt_time = localStorage.getItem("patient_app_time");
+    var tst_pfl_book_pnt_address = localStorage.getItem("patient_address");
+    var tst_pfl_book_sel_month_name = tst_pfl_book_pnt_appt_time.substr(3,3);
+    if (tst_pfl_book_sel_month_name == 'Jan') 
+     {
+    	 var tst_pfl_book_sel_month = '01';
+    	 
+     }//if mnth 1
+    if (tst_pfl_book_sel_month_name == 'Feb') 
+     {
+        var  tst_pfl_book_sel_month = '02';
+     }//if mnth 2
+    if (tst_pfl_book_sel_month_name == 'Mar') 
+     {
+    	 var tst_pfl_book_sel_month = '03';
+     }//if mnth 3
+    if (tst_pfl_book_sel_month_name == 'Apr') 
+     {
+    	var tst_pfl_book_sel_month = '04';
+  	  }//if mnth 4
+    if (tst_pfl_book_sel_month_name == 'May') 
+  	  {
+    		var tst_pfl_book_sel_month = '05';
+    	}//if mnth 5
+    if (tst_pfl_book_sel_month_name == 'Jun') 
+  	  {
+    		var tst_pfl_book_sel_month = '06';
+     }//if mnth 6
+    if (tst_pfl_book_sel_month_name == 'Jul') 
+     {
+    		var tst_pfl_book_sel_month = '07';
+     }//if mnth 7
+    if (tst_pfl_book_sel_month_name == 'Aug') 
+     {
+    		var tst_pfl_book_sel_month = '08';
+     	}//if mnth 8
+     if (tst_pfl_book_sel_month_name == 'Sep') 
+    	{
+    		var tst_pfl_book_sel_month = '09';
+    	}//if mnth 9
+    	if (tst_pfl_book_sel_month_name == 'Oct') 
+    	{
+    		var tst_pfl_book_sel_month = '10';
+    	}//if mnth 10
+    	if (tst_pfl_book_sel_month_name == 'Nov') 
+    	{
+    			var tst_pfl_book_sel_month = '11';
+    	}//if mnth 11
+    	if (tst_pfl_book_sel_month_name == 'Dec') 
+    	{
+    		var tst_pfl_book_sel_month = '12';
+    	}//if mnth 12
+    	   var i ;
+         function addZero(i)
+         {
+            if (i < 10) 
+            {
+               i = "0" + i;
+            }//if i
+              return i;
+            }//fnctn
+                       
+    	       var tst_pfl_book_tday = new Date();
+    	       var tst_pfl_book_sel_year = tst_pfl_book_pnt_appt_time.substr(7,4);
+             var tst_pfl_book_sel_date = tst_pfl_book_pnt_appt_time.substr(0,2);
+             var tst_pfl_book_sel_hours = tst_pfl_book_pnt_appt_time.substr(12,2);
+             var tst_pfl_book_sel_minutes = tst_pfl_book_pnt_appt_time.substr(15,2);
+             var tst_pfl_book_sel_sec = addZero(tst_pfl_book_tday.getSeconds());
+             var tst_pfl_book_sel_meridian = tst_pfl_book_pnt_appt_time.substr(18,2);
+             var tst_pfl_book_sel_hours_meridian = tst_pfl_book_sel_hours +" "+ tst_pfl_book_sel_meridian;
+             if (tst_pfl_book_sel_meridian == "AM") 
+             {
+             	 var tst_pfl_book_sel_time = tst_pfl_book_sel_year+"-"+tst_pfl_book_sel_month+"-"+tst_pfl_book_sel_date+" "+tst_pfl_book_sel_hours+":"+tst_pfl_book_sel_minutes+":"+tst_pfl_book_sel_sec;
+             	
+              }//if AM
+              if (tst_pfl_book_sel_hours_meridian == "12 PM")
+              {
+              	   var tst_pfl_book_sel_hours = "12";
+              	 var tst_pfl_book_sel_time = tst_pfl_book_sel_year+"-"+tst_pfl_book_sel_month+"-"+tst_pfl_book_sel_date+" "+tst_pfl_book_sel_hours+":"+tst_pfl_book_sel_minutes+":"+tst_pfl_book_sel_sec;
+                 
+              	}//if 12
+             if (tst_pfl_book_sel_hours_meridian == "01 PM")
+              {
+              	   var tst_pfl_book_sel_hours = "13";
+              	 var tst_pfl_book_sel_time = tst_pfl_book_sel_year+"-"+tst_pfl_book_sel_month+"-"+tst_pfl_book_sel_date+" "+tst_pfl_book_sel_hours+":"+tst_pfl_book_sel_minutes+":"+tst_pfl_book_sel_sec;
+                 
+              	}//if 01
+              	if (tst_pfl_book_sel_hours_meridian == "02 PM")
+               {
+              	   var tst_pfl_book_sel_hours = "14";
+                  var tst_pfl_book_sel_time = tst_pfl_book_sel_year+"-"+tst_pfl_book_sel_month+"-"+tst_pfl_book_sel_date+" "+tst_pfl_book_sel_hours+":"+tst_pfl_book_sel_minutes+":"+tst_pfl_book_sel_sec;
+                 
+                }//if 02
+               	if (tst_pfl_book_sel_hours_meridian == "03 PM")
+                  {
+              	      var tst_pfl_book_sel_hours = "15";
+                      var tst_pfl_book_sel_time = tst_pfl_book_sel_year+"-"+tst_pfl_book_sel_month+"-"+tst_pfl_book_sel_date+" "+tst_pfl_book_sel_hours+":"+tst_pfl_book_sel_minutes+":"+tst_pfl_book_sel_sec;
+                     
+                 }//if 03
+                 if (tst_pfl_book_sel_hours_meridian == "04 PM")
+                 {
+              	    var tst_pfl_book_sel_hours = "16";
+                   var tst_pfl_book_sel_time = tst_pfl_book_sel_year+"-"+tst_pfl_book_sel_month+"-"+tst_pfl_book_sel_date+" "+tst_pfl_book_sel_hours+":"+tst_pfl_book_sel_minutes+":"+tst_pfl_book_sel_sec;
+                  
+                  }// if 04
+                  if (tst_pfl_book_sel_hours_meridian == "05 PM")
+                 {
+              	    var tst_pfl_book_sel_hours = "17";
+                   var tst_pfl_book_sel_time = tst_pfl_book_sel_year+"-"+tst_pfl_book_sel_month+"-"+tst_pfl_book_sel_date+" "+tst_pfl_book_sel_hours+":"+tst_pfl_book_sel_minutes+":"+tst_pfl_book_sel_sec;
+                  
+                  }// if 05
+                   if (tst_pfl_book_sel_hours_meridian == "06 PM")
+                 {
+              	    var tst_pfl_book_sel_hours = "18";
+                   var tst_pfl_book_sel_time = tst_pfl_book_sel_year+"-"+tst_pfl_book_sel_month+"-"+tst_pfl_book_sel_date+" "+tst_pfl_book_sel_hours+":"+tst_pfl_book_sel_minutes+":"+tst_pfl_book_sel_sec;
+                  
+                  }// if 06
+                   if (tst_pfl_book_sel_hours_meridian == "07 PM")
+                 {
+              	    var tst_pfl_book_sel_hours = "19";
+                   var tst_pfl_book_sel_time = tst_pfl_book_sel_year+"-"+tst_pfl_book_sel_month+"-"+tst_pfl_book_sel_date+" "+tst_pfl_book_sel_hours+":"+tst_pfl_book_sel_minutes+":"+tst_pfl_book_sel_sec;
+                   
+                  }// if 07
+                   if (tst_pfl_book_sel_hours_meridian == "08 PM")
+                 {
+              	    var tst_pfl_book_sel_hours = "20";
+                   var tst_pfl_book_sel_time = tst_pfl_book_sel_year+"-"+tst_pfl_book_sel_month+"-"+tst_pfl_book_sel_date+" "+tst_pfl_book_sel_hours+":"+tst_pfl_book_sel_minutes+":"+tst_pfl_book_sel_sec;
+                   
+                  }// if 08
+                   if (tst_pfl_book_sel_hours_meridian == "09 PM")
+                 {
+              	    var tst_pfl_book_sel_hours = "21";
+                   var tst_pfl_book_sel_time = tst_pfl_book_sel_year+"-"+tst_pfl_book_sel_month+"-"+tst_pfl_book_sel_date+" "+tst_pfl_book_sel_hours+":"+tst_pfl_book_sel_minutes+":"+tst_pfl_book_sel_sec;
+                   
+                  }// if 09        
+       $.ajax({
+       url:tst_profile_host+"/m-checkout/book-order",
+       type:'POST',
+       dataType:'json',
+       data:{labSlug:tst_pfl_labslug,testSlugs:tst_profile_tstslug,patientName:tst_pfl_book_pnt_name,patientMobile:tst_pfl_book_pnt_mobileno,patientEmail:tst_pfl_book_pnt_mail,apptTime:tst_pfl_book_sel_time},
+          success:function(data)
+         {
+         	if (data.error) 
+         	{
+         	      var tst_pfl_error_page = document.createElement('div');
+                  $(tst_pfl_error_page).addClass("modal");
+                  $(tst_pfl_error_page).attr('id','test_pfl_modal_errorpage');
+                  $(tst_pfl_error_page).css('backgroundColor','#fff');
+                  $(tst_pfl_error_page).css('position','relative');
+                  $(tst_pfl_error_page).css('paddingRight','0px');
+                  $(tst_pfl_error_page).modal().open();
+                   var tst_pfl_error_closing = document.createElement('a');
+                  $(tst_pfl_error_closing).addClass("confirm_close");
+                  $(tst_pfl_error_closing).attr('href','#');
+                  $(tst_pfl_error_closing).html("&times;");
+                  $(tst_pfl_error_closing).css('marginTop' ,'-24px');
+                  $(tst_pfl_error_closing).css('marginRight','8px');
+                  $(tst_pfl_error_closing).css('fontSize','26px');
+                  $(tst_pfl_error_closing).css('float','right');
+                  var tst_pfl_error_heading = document.createElement('h4');
+                  $(tst_pfl_error_heading).html("Order Confirmation failed");
+                   $(tst_pfl_error_heading).css('color','#5cb0cf');
+                  $(tst_pfl_error_heading).css('textAlign','center');
+                  var tst_pfl_error_detail = document.createElement('div');
+                  $(tst_pfl_error_detail).html(data.error);
+                  $(tst_pfl_error_detail).css('marginTop','16px');
+                  $(tst_pfl_error_detail).css('marginLeft','16px');
+                  var tst_pfl_error_close = document.createElement('button');
+                  $(tst_pfl_error_close).addClass("close_modal");
+                  $(tst_pfl_error_close).attr('type','button');
+                  $(tst_pfl_error_close).html("Close");
+                  $(tst_pfl_error_close).css('float','right');
+                  $(tst_pfl_error_close).css('marginTop','8px');
+                  $(tst_pfl_error_close).css('width','80px');
+                  $(tst_pfl_error_close).css('borderRadius','5px');
+                  $(tst_pfl_error_close).css('color','white');
+                  $(tst_pfl_error_close).css('background','rgb(236,73,73)');
+                  $(tst_pfl_error_close).css('border','0px');
+                  $(tst_pfl_error_close).css('marginRight','20px');
+                   $("#test_pfl_modal_errorpage").append(tst_pfl_error_closing);
+                   $("#test_pfl_modal_errorpage").append(tst_pfl_error_heading);
+                   $("#test_pfl_modal_errorpage").append(tst_pfl_error_detail);
+                   $("#test_pfl_modal_errorpage").append(tst_pfl_error_close);
+                   $(tst_pfl_error_closing).on('click',function () 
+                   {
+                   	$(tst_pfl_error_page).modal().close();
+                 	});// srror click close
+                   $(tst_pfl_error_close).on('click',function () 
+                   {
+                   	$(tst_pfl_error_page).modal().close();
+                  });//tst error close fnctn
+
+          	}//if error
+       else 
+       {
+       	  var tst_pfl_confirm_page = document.createElement('div');
+           $(tst_pfl_confirm_page).addClass("modal");
+           $(tst_pfl_confirm_page).attr('id','tst_pfl_modal_confirmpage');
+           $(tst_pfl_confirm_page).css('backgroundColor','#fff');
+           $(tst_pfl_confirm_page).css('position','relative');
+           $(tst_pfl_confirm_page).css('paddingRight','0px');
+           $(tst_pfl_confirm_page).modal().open();
+           var tst_pfl_confirm_closing = document.createElement('a');
+           $(tst_pfl_confirm_closing).addClass("tst_pfl_confirm_close");
+           $(tst_pfl_confirm_closing).attr('href','#');
+           $(tst_pfl_confirm_closing).html("&times;");
+           $(tst_pfl_confirm_closing).css('marginTop' ,'-23px');
+           $(tst_pfl_confirm_closing).css('fontSize','26px');
+           $(tst_pfl_confirm_closing).css('float','right');
+           $(tst_pfl_confirm_closing).css('marginRight','8px');
+           var tst_pfl_order_element = document.createElement('div');
+           $(tst_pfl_order_element).addClass("order_details");
+           $(tst_pfl_order_element).css('marginTop','9px');
+           var tst_pfl_booking_heading = document.createElement('h4');
+           $(tst_pfl_booking_heading).html("Order Confirmation");
+           $(tst_pfl_booking_heading).css('textAlign','center');
+           $(tst_pfl_booking_heading).css('fontSize','18px');
+           $(tst_pfl_booking_heading).css('fontWeight','bold');
+           $(tst_pfl_booking_heading).css('color','#5cb0cf');
+          var tst_pfl_success_element = document.createElement('div');
+          $(tst_pfl_success_element).html("Your order is successfully placed."+"&nbsp"+"&nbsp"+"Please check your mail for details.");
+          $(tst_pfl_success_element).css('marginLeft','24px');
+          $(tst_pfl_success_element).css('marginTop','8px');
+          var tst_pfl_ordered_table = document.createElement('table');
+          $(tst_pfl_ordered_table).css('marginTop','8px');
+          $(tst_pfl_ordered_table).css('width','552px');
+          var tst_pfl_labname_tr = document.createElement('tr');
+          $(tst_pfl_labname_tr).addClass("tst_pfl_order_class");
+          $(tst_pfl_labname_tr).attr('id','tst_ordered_lab');
+          var tst_pfl_labname_td= document.createElement('td');
+          $(tst_pfl_labname_td).addClass("tst_pfl_success_det");
+          $(tst_pfl_labname_td).html("&nbsp"+"&nbsp"+"&nbsp"+"&nbsp"+"Lab name");
+          $(tst_pfl_labname_td).css('borderRight','1px solid #ddd');
+          var tst_pfl_lab_name_td = document.createElement('td');
+          $(tst_pfl_lab_name_td).addClass("tst_pfl_success_det");
+          $(tst_pfl_lab_name_td).html("&nbsp"+"&nbsp"+"&nbsp"+data.labName);
+          var tst_pfl_orderid_tr = document.createElement('tr');
+          $(tst_pfl_orderid_tr).addClass("tst_pfl_order_class");
+          var tst_pfl_orderid_td = document.createElement('td');
+          $(tst_pfl_orderid_td).addClass("tst_pfl_success_det");
+          $(tst_pfl_orderid_td).html("&nbsp"+"&nbsp"+"&nbsp"+"&nbsp"+"OrderId");
+          $(tst_pfl_orderid_td).css('borderRight','1px solid #ddd');
+          var tst_pfl_order_id_td = document.createElement('td');
+          $(tst_pfl_order_id_td).addClass("tst_pfl_success_det");
+          $(tst_pfl_order_id_td).html("&nbsp"+"&nbsp"+"&nbsp"+data.orderId);
+          var tst_pfl_ptnt_name_tr = document.createElement('tr');
+          $(tst_pfl_ptnt_name_tr).addClass("tst_pfl_order_class");
+          $(tst_pfl_ptnt_name_tr).attr('id','order_name');
+          var tst_pfl_ptnt_name_td = document.createElement('td');
+          $(tst_pfl_ptnt_name_td).addClass("tst_pfl_success_det");
+          $(tst_pfl_ptnt_name_td).html("&nbsp"+"&nbsp"+"&nbsp"+"&nbsp"+"Name");
+          $(tst_pfl_ptnt_name_td).css('borderRight','1px solid #ddd');
+          var tst_pfl_ptntname_td = document.createElement('td');
+          $(tst_pfl_ptntname_td).addClass("tst_pfl_success_det");
+          $(tst_pfl_ptntname_td).html("&nbsp"+"&nbsp"+"&nbsp"+data.patientName);
+          var tst_pfl_apptime_tr = document.createElement('tr');
+          $(tst_pfl_apptime_tr).addClass("tst_pfl_order_class");
+          var tst_pfl_apptime_td = document.createElement('td');
+           $(tst_pfl_apptime_td).addClass("tst_pfl_success_det");
+           $(tst_pfl_apptime_td).html("&nbsp"+"&nbsp"+"&nbsp"+"&nbsp"+"Appointment Timing");
+           $(tst_pfl_apptime_td).css('borderRight','1px solid #ddd');
+           var tst_pfl_appt_time_td = document.createElement('td');
+           $(tst_pfl_appt_time_td).addClass("tst_pfl_success_det");
+           $(tst_pfl_appt_time_td).html("&nbsp"+"&nbsp"+"&nbsp"+data.apptTime);
+           var tst_pfl_close_button = document.createElement('button');
+           $(tst_pfl_close_button).addClass("tst_pfl_close_modal");
+           $(tst_pfl_close_button).attr('type','button');
+           $(tst_pfl_close_button).html("Close");
+           $(tst_pfl_close_button).css('float','right');
+           $(tst_pfl_close_button).css('marginTop','8px');
+           $(tst_pfl_close_button).css('width','80px');
+           $(tst_pfl_close_button).css('borderRadius','5px');
+           $(tst_pfl_close_button).css('color','white');
+           $(tst_pfl_close_button).css('background','rgb(236,73,73)');
+           $(tst_pfl_close_button).css('border','0px');
+           $(tst_pfl_close_button).css('marginRight','20px');
+           $(tst_pfl_labname_tr).append(tst_pfl_labname_td);
+           $(tst_pfl_labname_tr).append(tst_pfl_lab_name_td);
+           $(tst_pfl_orderid_tr).append(tst_pfl_orderid_td);
+           $(tst_pfl_orderid_tr).append(tst_pfl_order_id_td);
+           $(tst_pfl_ptnt_name_tr).append(tst_pfl_ptnt_name_td);
+           $(tst_pfl_ptnt_name_tr).append(tst_pfl_ptntname_td);
+           $(tst_pfl_apptime_tr).append(tst_pfl_apptime_td);
+           $(tst_pfl_apptime_tr).append(tst_pfl_appt_time_td);
+           $(tst_pfl_ordered_table).append(tst_pfl_labname_tr);
+           $(tst_pfl_ordered_table).append(tst_pfl_orderid_tr);
+           $(tst_pfl_ordered_table).append(tst_pfl_ptnt_name_tr);
+           $(tst_pfl_ordered_table).append(tst_pfl_apptime_tr);
+           $(tst_pfl_order_element).append(tst_pfl_booking_heading);
+           $(tst_pfl_order_element).append(tst_pfl_success_element);
+           $(tst_pfl_order_element).append(tst_pfl_ordered_table);
+           $(tst_pfl_order_element).append(tst_pfl_close_button);
+           $("#tst_pfl_modal_confirmpage").append(tst_pfl_confirm_closing);
+           $("#tst_pfl_modal_confirmpage").append(tst_pfl_order_element);
+           $(".tst_pfl_confirm_close").on('click',function () 
+           {
+               $(tst_pfl_confirm_page).modal().close(); 
+           });//click
+           $(".tst_pfl_close_modal").on('click',function () 
+           {
+               $(tst_pfl_confirm_page).modal().close(); 
+           });//click btn
+          }//else
+        }//success
+        });//ajax
+     }//fnctn endng  
