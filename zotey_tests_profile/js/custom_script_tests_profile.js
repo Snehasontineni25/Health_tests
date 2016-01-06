@@ -30,16 +30,12 @@ function test_profile_details_handler()
 	   $(tst_profile_name).css('color','rgb(65, 167, 179)');
 	   $(tst_profile_name).css('fontWeight','bold');
 	   $(tst_profile_name).css('fontSize','18px');
-	   $(tst_profile_name).css('paddingTop','8px');
-	   var tst_profile_description = document.createElement('div');
-	   $(tst_profile_description).html("Description");
-	   $(tst_profile_description).css('fontWeight','bold');
-	   $(tst_profile_description).css('color','rgb(65, 167, 179)');
-	   $(tst_profile_description).css('fontSize','16px');
-	   $(tst_profile_description).css('marginBottom','6px');
+	   $(tst_profile_name).css('paddingTop','13px');
 	   var tst_profile_description_data = document.createElement('div');
 	   $(tst_profile_description_data).html(data.testInfo.testDesc);
 	   $(tst_profile_description_data).css('textAlign','justify');
+	   $(tst_profile_description_data).css('paddingTop','26px');
+	   $(tst_profile_description_data).css('textIndent','38px');
 	   var tst_profile_offering_labs = document.createElement('div');
 	   $(tst_profile_offering_labs).html("Offering Labs");
 	   $(tst_profile_offering_labs).css('color','rgb(65, 167, 179)');
@@ -294,7 +290,6 @@ function test_profile_details_handler()
 	   $(tst_profile_img_col).addClass("col-md-3 col-sm-3");
 	   $(tst_profile_img_col).attr('id','cloud_tests');
       $(tst_profile_testname_row).append(tst_profile_name);
-	   $(tst_profile_testname_row).append(tst_profile_description);
 	   $(tst_profile_testname_row).append(tst_profile_description_data);
 	   $(tst_profile_testname_row).append(tst_profile_offering_labs);
 	   $(tst_profile_testname_row).append(tst_profile_labs_table);
@@ -310,6 +305,7 @@ function test_profile_details_handler()
 	   $(tst_profile_popular_head).css('fontWeight','bold');
 	   $(tst_profile_popular_head).css('marginBottom','13px');
 	   $(tst_profile_popular_head).css('textAlign','center');
+	   $(tst_profile_popular_head).css('marginTop','25px');
 	   $(tst_profile_img_col).append(tst_profile_popular_head);
 	   for (var i=0;i<data.popular_tests.length;i++) 
 	   {
@@ -331,6 +327,7 @@ function test_profile_details_handler()
 	      $(tst_profile_related_head).css('fontWeight','bold');
 	      $(tst_profile_related_head).css('marginBottom','13px');
 	      $(tst_profile_related_head).css('textAlign','center');
+	      $(tst_profile_related_head).css('marginTop','25px');
 	      $(tst_profile_img_col).append(tst_profile_related_head);
 	     for (var i=0;i<data.relatedTests.length;i++) 
 	     {
