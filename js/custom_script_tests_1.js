@@ -231,11 +231,11 @@ function tests_list_handler()
       $(tst_test_list_col).attr('id','tst_chk_list');
       var test_num = data.testsList.length;
    	var test_num_ceil = Math.ceil(test_num/3);
-   	var tst_catgrs_num = data.categoryList.length+1;
+   	var tst_catgrs_num = data.categoryList.length;
    	var tst_catgrs_tst_num = tst_catgrs_num - test_num_ceil;
    	if (tst_catgrs_tst_num > 0) 
    	{
-   		var col_pad = tst_catgrs_num*45+"px";
+   		var col_pad = tst_catgrs_tst_num*45+"px";
    		$(tst_test_list_col).css('paddingBottom',col_pad);
    	}
       var tests_list = document.createElement('div');
