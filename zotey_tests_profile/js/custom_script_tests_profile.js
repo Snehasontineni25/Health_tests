@@ -290,7 +290,7 @@ function test_profile_details_handler()
        {
           $("#tst_profile_tab").tablesorter( {sortList: [[0,0], [1,0],[2,0],[3,0],[4,0]]} ); 
        });//row on click
-       var tst_profile_img_col = document.createElement('div');
+      var tst_profile_img_col = document.createElement('div');
 	   $(tst_profile_img_col).addClass("col-md-3 col-sm-3");
 	   $(tst_profile_img_col).attr('id','cloud_tests');
       $(tst_profile_testname_row).append(tst_profile_name);
@@ -358,7 +358,7 @@ function tst_profile_details_hander()
 	var tst_pfl_labarea =$(this).data('tst-profile-labarea');
 	var tst_pfl_labaddress = $(this).data('tst-profile-labaddress');
 	var tst_pfl_labaddress_pin = $(this).data('tst-profile-labpin');
-	var tst_pfl_online_rpt = $(this).data('tst-profile-onlineReports');
+	var tst_pfl_online_rpt = $(this).data('tst-profile-onlineReport');
 	var tst_pfl_vst_type = $(this).data('tst-profile-labvisit');
   
   tst_profile_form_handler(tst_pfl_online_rpt,tst_pfl_vst_type,tst_pfl_labname,tst_pfl_labslug,tst_pfl_discount,tst_pfl_mrp,tst_pfl_dp,tst_pfl_labarea,tst_pfl_labaddress,tst_pfl_labaddress_pin);
@@ -1512,7 +1512,7 @@ function tst_pfle_booking_handler(tst_pfl_online_rpt,tst_pfl_vst_type,tst_pfl_la
        url:tst_profile_host+"/m-checkout/book-order",
        type:'POST',
        dataType:'json',
-       data:{labSlug:tst_pfl_labslug,testSlugs:tst_profile_tstslug,patientName:tst_pfl_book_pnt_name,patientMobile:tst_pfl_book_pnt_mobileno,patientEmail:tst_pfl_book_pnt_mail,apptTime:tst_pfl_book_sel_time},
+       data:{labSlug:tst_pfl_labslug,homeVisitAddress:tst_pfl_book_pnt_address,testSlugs:tst_profile_tstslug,patientName:tst_pfl_book_pnt_name,patientMobile:tst_pfl_book_pnt_mobileno,patientEmail:tst_pfl_book_pnt_mail,apptTime:tst_pfl_book_sel_time},
           success:function(data)
          {
          	if (data.error) 

@@ -1896,7 +1896,6 @@ function tst_form_handler(tst_sel_onlinereport,tst_sel_type,tst_sel_labslug,tst_
                   $(tst_preview_heading).css('fontSize','18px');
                   $(tst_preview_heading).css('fontWeight','bold');
                   $(tst_preview_heading).css('color','#5cb0cf');
-                  var tst_time_error = document.createElement('div');
                    var tst_preview_pkg_info = document.createElement('div');
                   $(tst_preview_pkg_info).html("Lab & Price Information");
                   $(tst_preview_pkg_info).css('background','rgb(65, 167, 179)');
@@ -2391,7 +2390,7 @@ function tst_form_handler(tst_sel_onlinereport,tst_sel_type,tst_sel_labslug,tst_
          url:tst_host_api+"/m-checkout/book-order",
          type:'POST',
          dataType:'json',
-         data:{labSlug:tst_sel_labslug,testSlugs:tst_final_slug,patientName:tst_pnt_name,patientMobile:tst_pnt_mobileno,patientEmail:tst_mail,apptTime:tst_sel_time},
+         data:{labSlug:tst_sel_labslug,homeVisitAddress:tst_address,testSlugs:tst_final_slug,patientName:tst_pnt_name,patientMobile:tst_pnt_mobileno,patientEmail:tst_mail,apptTime:tst_sel_time},
           success:function(data)
           {
           	 if(data.error)
