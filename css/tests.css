@@ -110,12 +110,6 @@ li
 {
    border-right:1px solid #ddd !important;
 }
-.datetimepicker 
-{
-  left:666px !important;
-  top:320px !important; 
-  position:fixed !important;
-}
 #tst_step2_back_btn
 {
   background-image: linear-gradient(to bottom, #EC4949 25%, #C04040 100%) !important;
@@ -280,4 +274,20 @@ li
 .cust-container {
     padding-left: 0px !important;
     padding-right: 0px !important;
+}
+#tst_pag_ptnt_gender
+{
+  -webkit-appearance: none !important;
+}
+.form-wizard
+{
+ padding:0px !important;
+}
+#tmm-form-wizard.substrate .input-block label 
+{
+	font-size: 12px !important;
+}
+#tst_pag_ptnt_gender> option:first-child
+{
+    display: none;
 }

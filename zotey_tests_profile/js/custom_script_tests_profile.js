@@ -12,6 +12,7 @@ function test_profile_details_handler()
    data:{testSlug:tst_profile_slug},
    success:function(data)
    {
+   	 
    	tst_profile_tstname = data.testInfo.testName;
    	tst_profile_tstslug = data.testInfo.testSlug;
       var tst_profile_loading = document.getElementById("tst_profile_loader");
