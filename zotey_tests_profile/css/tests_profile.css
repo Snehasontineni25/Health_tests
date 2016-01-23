@@ -101,4 +101,21 @@ li
  {
   border:1px solid #ddd !important;
 }
+#tst_pfl_gender
+{
+  -webkit-appearance: none !important;
+}
+.form-wizard
+{
+ padding:0px !important;
+}
+#tmm-form-wizard.substrate .input-block label 
+{
+	font-size: 12px !important;
+}
+#tst_pfl_gender> option:first-child
+{
+    display: none;
+}
+
 
